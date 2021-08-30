@@ -19,7 +19,7 @@ class CreateApartmentsTable extends Migration
             $table->string('city', 50);
             $table->string('address');
             $table->decimal('latitude', 8, 6);
-            $table->string('longitude', 9, 6);
+            $table->decimal('longitude', 9, 6);
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->unsignedTinyInteger('n_rooms');

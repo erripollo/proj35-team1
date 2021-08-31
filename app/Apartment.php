@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Apartment extends Model
 {
@@ -21,4 +22,9 @@ class Apartment extends Model
         return $this->hasMany(Message::class);
     }
 
+
+    public function services() : BelongsToMany
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

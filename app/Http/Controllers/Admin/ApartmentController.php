@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Apartment;
 use App\Sponsor;
+use App\Service;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -28,9 +29,10 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
+        $services = Service::all();
         $sponsors= Sponsor::all();
-        return view('admin.apartments.create', compact('sponsors'));
+        return view('admin.apartments.create', compact('sponsors', 'services'));
     }
 
     /**
@@ -59,6 +61,7 @@ class ApartmentController extends Controller
         ]);
         $apartment =  Apartment::create($validate);
         $apartment->sponsors()->attach($request->sponsors);
+        $apartment->services()->attach($request->services);
         return redirect()->route('admin.apartments.index');
     }
 
@@ -81,8 +84,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {   
+        $services = Service::all();
         $sponsors= Sponsor::all();
-        return view('admin.apartments.edit', compact('apartment','sponsors'));
+        return view('admin.apartments.edit', compact('apartment','sponsors', 'services'));
     }
 
     /**
@@ -112,6 +116,7 @@ class ApartmentController extends Controller
         ]);
         $apartment->update($validate);
         $apartment->sponsors()->sync($request->sponsors);
+        $apartment->services()->sync($request->services);
         return redirect()->route('admin.apartments.index');
     }
 
@@ -123,6 +128,7 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+        $apartment->services()->detach();
         $apartment->delete();
         $apartment->sponsors()->detach();
         return redirect()->route('admin.apartaments.index');

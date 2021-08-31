@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Apartment;
+use App\Sponsor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,9 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.apartments.create');
+    {   
+        $sponsors= Sponsor::all();
+        return view('admin.apartments.create', compact('sponsors'));
     }
 
     /**
@@ -56,6 +58,7 @@ class ApartmentController extends Controller
         
         ]);
         $apartment =  Apartment::create($validate);
+        $apartment->sponsors()->attach($request->sponsors);
         return redirect()->route('admin.apartments.index');
     }
 
@@ -77,8 +80,9 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Apartment $apartment)
-    {
-        return view('admin.apartments.edit', compact('apartment'));
+    {   
+        $sponsors= Sponsor::all();
+        return view('admin.apartments.edit', compact('apartment','sponsors'));
     }
 
     /**
@@ -107,6 +111,7 @@ class ApartmentController extends Controller
         
         ]);
         $apartment->update($validate);
+        $apartment->sponsors()->sync($request->sponsors);
         return redirect()->route('admin.apartments.index');
     }
 
@@ -119,6 +124,7 @@ class ApartmentController extends Controller
     public function destroy(Apartment $apartment)
     {
         $apartment->delete();
+        $apartment->sponsors()->detach();
         return redirect()->route('admin.apartaments.index');
     }
 }

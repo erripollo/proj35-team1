@@ -20,7 +20,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::where('user_id', Auth::id())->get();
 
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -60,11 +60,10 @@ class ApartmentController extends Controller
             'visible'=>'required',
         ]);
 
-       $apartment = new Apartment();
-       
-       $apartment-> user_id = Auth::user()->id;
-       $apartment->fill($request->all());
-       $apartment->save();      
+        $apartment = Apartment::create($validate);
+        $apartment-> user_id = Auth::user()->id;
+        $apartment->fill($request->all());
+        $apartment->save();      
         
         $apartment->sponsors()->attach($request->sponsors);
         $apartment->services()->attach($request->services);
@@ -135,8 +134,8 @@ class ApartmentController extends Controller
     public function destroy(Apartment $apartment)
     {
         $apartment->services()->detach();
-        $apartment->delete();
         $apartment->sponsors()->detach();
-        return redirect()->route('admin.apartaments.index');
+        $apartment->delete();
+        return redirect()->route('admin.apartments.index');
     }
 }

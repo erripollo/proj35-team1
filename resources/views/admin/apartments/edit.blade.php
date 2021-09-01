@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1 class="text-center pt-3 pb-3">CHANGE THE APARTMENT</h1>
+<h1 class="text-center pt-3 pb-3">EDIT THE APARTMENT</h1>
 
 <div class="container">
 
@@ -44,7 +44,7 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <div class="form-group">
+       {{--  <div class="form-group">
             <label for="latitude">EDIT LATITUDE:</label>
             <input type="number" step="0.000001" name="latitude" id="latitude" class="form-control @error('latitude') is-invalid @enderror" placeholder="Add a latitude" aria-describedby="latitudeHelper" value="{{$apartment->latitude}}" required>
         </div>
@@ -58,7 +58,7 @@
         </div>
         @error('longitude')
         <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        @enderror --}}
 
         <div class="form-group">
             <label for="image">EDIT IMAGE:</label>
@@ -70,7 +70,7 @@
 
         <div class="form-group">
             <label for="description">EDIT DESCRIPTION:</label>
-            <textarea name="description" id="description" class="form-control text-muted @error('description') is-invalid @enderror" rows="3" placeholder="Add a description">{{ $apartment->description }}</textarea>
+            <textarea name="description" id="description" class="form-control text-muted @error('description') is-invalid @enderror" rows="5" placeholder="Add a description">{{ $apartment->description }}</textarea>
         </div>
         @error('description')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -105,22 +105,34 @@
             <select multiple class="form-control" name="services[]" id="services">
               <option value="" disabled>Select a service</option>
                   @if($services)
-                  @foreach ($services as $service)
-                  @if ($errors->any())
-                  <option value="{{ $service->id }}" {{ in_array($service->id, old('services')) ? 'selected' : '' }}>{{ $service->name }}</option>
-                  @else
-                  <option value="{{ $service->id }}" {{ $apartment->services->contains($service) ? 'selected' : '' }}>{{ $service->name }}</option>
-                  @endif  
-                  @endforeach
+                    @foreach ($services as $service)
+                        @if ($errors->any())
+                            <option value="{{ $service->id }}" {{ in_array($service->id, old('services')) ? 'selected' : '' }}>{{ $service->name }}</option>
+                        @else
+                            <option value="{{ $service->id }}" {{ $apartment->services->contains($service) ? 'selected' : '' }}>{{ $service->name }}</option>
+                        @endif  
+                    @endforeach
                   @endif
             </select>
           </div>
 
-        <div class="form-group d-flex">
-            <label for="visible">VISIBLE:</label>
-            <input type="radio" name="visible" id="visible" class="form-control @error('visible') is-invalid @enderror" placeholder="Add a visible" aria-describedby="visibleHelper" value="1" required>
-            <input type="radio" name="visible" id="visible" class="form-control @error('visible') is-invalid @enderror" placeholder="Add a visible" aria-describedby="visibleHelper" value="0" required>
-        </div>
+          <fieldset class="form-group row">
+            <legend class="col-form-label col-sm-2 float-sm-left pt-0">VISIBLLE:</legend>
+            <div class="col-sm-10">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="visible" id="visible" value="1" {{($apartment->visible) ? 'checked' : '' }} >
+                <label class="form-check-label" for="visible">
+                  YES
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="visible" id="visible" value="0" {{($apartment->visible) ? '' : 'checked' }}>
+                <label class="form-check-label" for="visible">
+                  NO
+                </label>
+              </div>
+            </div>
+          </fieldset>
 
         @error('visible')
         <div class="alert alert-danger">{{ $message }}</div>

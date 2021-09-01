@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Apartment;
+use App\User;
 use App\Sponsor;
 use App\Service;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartment = Apartment::all();
+        $apartments = Apartment::all();
 
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -41,9 +43,9 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $validate = $request->validate([
+        $validate = $request->validate([ 
             'title'=>'required | max:255 | min: 4',
             'city'=>'required | max:50 | min: 2',
             'address'=>'required | max:255 | min: 4',
@@ -56,10 +58,17 @@ class ApartmentController extends Controller
             'n_beds'=>'required | integer | min: 1',
             'squared_meters'=>'nullable | integer | min:25',
             'visible'=>'required',
-            
-        
         ]);
+
+       
+       
+        // $newapartment = new Apartment();
+        // $newapartment->user_id = Auth::user()->id;
+        // $newapartment->save();
+      
         $apartment =  Apartment::create($validate);
+        $apartment->fill(['user_id'=> $user->id]);
+        $apartment->save();
         $apartment->sponsors()->attach($request->sponsors);
         $apartment->services()->attach($request->services);
         return redirect()->route('admin.apartments.index');

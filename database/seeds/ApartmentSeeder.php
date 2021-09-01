@@ -2,6 +2,7 @@
 
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 
 class ApartmentSeeder extends Seeder

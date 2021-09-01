@@ -60,15 +60,12 @@ class ApartmentController extends Controller
             'visible'=>'required',
         ]);
 
+       $apartment = new Apartment();
        
-       
-        // $newapartment = new Apartment();
-        // $newapartment->user_id = Auth::user()->id;
-        // $newapartment->save();
-      
-        $apartment =  Apartment::create($validate);
-        $apartment->fill(['user_id'=> $user->id]);
-        $apartment->save();
+       $apartment-> user_id = Auth::user()->id;
+       $apartment->fill($request->all());
+       $apartment->save();      
+        
         $apartment->sponsors()->attach($request->sponsors);
         $apartment->services()->attach($request->services);
         return redirect()->route('admin.apartments.index');

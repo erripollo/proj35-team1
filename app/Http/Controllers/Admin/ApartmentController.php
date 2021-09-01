@@ -7,6 +7,7 @@ use App\User;
 use App\Sponsor;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -49,8 +50,8 @@ class ApartmentController extends Controller
             'title'=>'required | max:255 | min: 4',
             'city'=>'required | max:50 | min: 2',
             'address'=>'required | max:255 | min: 4',
-            'latitude'=>'required',
-            'longitude'=>'required',
+            'latitude'=>'nullable',
+            'longitude'=>'nullable',
             'image'=>'nullable | image | max: 150',
             'description'=>'nullable | min: 10',
             'n_rooms'=>'required | integer | min: 1',
@@ -60,8 +61,18 @@ class ApartmentController extends Controller
             'visible'=>'required',
         ]);
 
+        /* chiamata API e salvataggio della latitudine e longitudine in base all'indirizzo inserito */
+        $fullAddress = $request->city . ' ' . $request->address;
+        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $fullAddress . '.json?Key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA')->json();
+        //dd($response);
+        $lat = $response['results'][0]['position']['lat'];
+        $lon = $response['results'][0]['position']['lon'];
+        //dd($lat, $lon);
+
         $apartment = Apartment::create($validate);
-        $apartment-> user_id = Auth::user()->id;
+        $apartment->user_id = Auth::user()->id;
+        $apartment->latitude = $lat;
+        $apartment->longitude = $lon;
         $apartment->fill($request->all());
         $apartment->save();      
         
@@ -107,8 +118,8 @@ class ApartmentController extends Controller
             'title'=>'required | max:255 | min: 4',
             'city'=>'required | max:50 | min: 2',
             'address'=>'required | max:255 | min: 4',
-            'latitude'=>'required',
-            'longitude'=>'required',
+            'latitude'=>'nullable',
+            'longitude'=>'nullable',
             'image'=>'nullable | image | max: 150',
             'description'=>'nullable | min: 10',
             'n_rooms'=>'required | integer | min: 1',
@@ -116,9 +127,21 @@ class ApartmentController extends Controller
             'n_beds'=>'required | integer | min: 1',
             'squared_meters'=>'nullable | integer | min:25',
             'visible'=>'required',
-            
-        
         ]);
+
+        /* chiamata API e salvataggio della latitudine e longitudine in base all'indirizzo inserito */
+        $fullAddress = $request->city . ' ' . $request->address;
+        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $fullAddress . '.json?Key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA')->json();
+        //dd($response);
+        $lat = $response['results'][0]['position']['lat'];
+        $lon = $response['results'][0]['position']['lon'];
+        //dd($lat, $lon);
+
+        $apartment->latitude = $lat;
+        $apartment->longitude = $lon;
+        
+
+
         $apartment->update($validate);
         $apartment->sponsors()->sync($request->sponsors);
         $apartment->services()->sync($request->services);

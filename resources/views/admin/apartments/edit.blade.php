@@ -60,13 +60,22 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror --}}
 
+        {{-- current image --}}
         <div class="form-group">
-            <label for="image">EDIT IMAGE:</label>
-            <input type="file" name="image" id="image">
+            <h4>Current image</h4>
+            <img width="150" src="{{ asset('storage/' . $apartment->image) }}" alt="{{ $apartment->title }}">
         </div>
-        @error('image')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+  
+          {{-- load image --}}
+          <div class="form-group">
+            <label for="image">Change image</label>
+            <input type="file" name="image" id="image" class="form-control-file" placeholder="Change the apartment image" aria-describedby="imageHelper" @error('image') is-invalid @enderror>
+            <small id="imageHelper" class="text-muted">Change the image for this apartment</small>
+          </div>
+          {{-- error image --}}
+          @error('image')
+              <div class="alert alert-danger">{{$message}}</div>
+          @enderror
 
         <div class="form-group">
             <label for="description">EDIT DESCRIPTION:</label>
@@ -114,7 +123,7 @@
                     @endforeach
                   @endif
             </select>
-          </div>
+        </div>
 
           <fieldset class="form-group row">
             <legend class="col-form-label col-sm-2 float-sm-left pt-0">VISIBLLE:</legend>

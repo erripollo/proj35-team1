@@ -58,14 +58,13 @@
         @error('longitude')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror --}}
-
+        
         <div class="form-group">
             <label for="image">IMAGE:</label>
-            <input type="file" name="image" id="image">
+            <input type="file" class="form-control-file" name="image" id="image" placeholder="Add a apartment image" aria-describedby="imageHelper">
+            <small id="imageHelper" class="form-text text-muted">Add a image for this apartment</small>
         </div>
-        @error('image')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        
 
         <div class="form-group">
             <label for="description">DESCRIPTION:</label>

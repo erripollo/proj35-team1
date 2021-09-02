@@ -8,6 +8,7 @@ use App\Sponsor;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -61,6 +62,14 @@ class ApartmentController extends Controller
             'visible'=>'required',
         ]);
 
+
+        if ($request->hasFile('image')){
+            $file_path = Storage::put('apart_img', $validate['image']);
+            $validate['image'] = $file_path;
+        }
+
+        //dd($request->all());
+
         /* chiamata API e salvataggio della latitudine e longitudine in base all'indirizzo inserito */
         $fullAddress = $request->city . ' ' . $request->address;
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $fullAddress . '.json?Key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA')->json();
@@ -69,12 +78,18 @@ class ApartmentController extends Controller
         $lon = $response['results'][0]['position']['lon'];
         //dd($lat, $lon);
 
+
+        
+
+
         $apartment = Apartment::create($validate);
         $apartment->user_id = Auth::user()->id;
         $apartment->latitude = $lat;
         $apartment->longitude = $lon;
-        $apartment->fill($request->all());
-        $apartment->save();      
+        //$apartment->fill($request->all());
+        $apartment->save();
+        
+        
         
         $apartment->sponsors()->attach($request->sponsors);
         $apartment->services()->attach($request->services);
@@ -129,6 +144,12 @@ class ApartmentController extends Controller
             'visible'=>'required',
         ]);
 
+        if (array_key_exists('image', $validate)){
+            $file_path = Storage::put('apart_img', $validate['image']);
+            $validate['image'] = $file_path;
+            Storage::delete($apartment['image']);
+        }
+
         /* chiamata API e salvataggio della latitudine e longitudine in base all'indirizzo inserito */
         $fullAddress = $request->city . ' ' . $request->address;
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $fullAddress . '.json?Key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA')->json();
@@ -159,6 +180,7 @@ class ApartmentController extends Controller
         $apartment->services()->detach();
         $apartment->sponsors()->detach();
         $apartment->delete();
+        Storage::delete($apartment['image']);
         return redirect()->route('admin.apartments.index');
     }
 }

@@ -29,7 +29,7 @@
                 @foreach ($apartments as $apartment)
                 <tr>
                     <td>{{ $apartment->id }}</td>
-                    <td><img width="100" src="{{ $apartment->image }}" alt=""></td>
+                    <td><img width="100" src="{{ asset('storage/' . $apartment->image) }}" alt="{{$apartment->title}}"></td>
                     <td>{{ $apartment->title }}</td>
                     <td>{{ Str::limit($apartment->description, 150, '...') }}</td>
                     <td>{{ $apartment->city }}</td>

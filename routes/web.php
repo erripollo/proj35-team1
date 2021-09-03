@@ -25,3 +25,9 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('apartments', ApartmentController::class);
 });
+
+/* Guest routes */
+
+Route::get('house', function () {
+    return view('guest.house');
+})->name('house');

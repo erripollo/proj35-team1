@@ -36,31 +36,32 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
         url:'https://api.tomtom.com/search/2/search/' ,
 
-        key:'.json?key=qRO17xCJNDBuG8WyLOU0pOgHavh2B2un',
+        key:'.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
 
-        searchCity: 'Milano',
-
-        // fullUrl : url + searchCity + key,
+        searchCity: '',
+        
         
     },
     methods:{
+        
         searchApart(){
-            axios.get('https://api.tomtom.com/search/2/geocode/Milano.json?key=qRO17xCJNDBuG8WyLOU0pOgHavh2B2un').then(resp => {
+            axios.get(this.url + this.searchCity + this.key).then(resp => {
                 console.log(resp, 'CALL TOMTOM');
             }).catch(e => {
                 console.error('Sorry! ' + e);
             })
         }
+        
     },
 
     mounted() {
 
-        //console.log(this.fullUrl, 'FULLurl')
         axios.get('/api/apartments').then(resp => {
             console.log(resp, 'PRIMA API CALL');
             this.apartments = resp.data.data;
         }).catch(e => {
             console.error('Sorry! ' + e);
         }) 
+
     }
 });

@@ -49923,13 +49923,12 @@ var app = new Vue({
   data: {
     apartments: null,
     url: 'https://api.tomtom.com/search/2/search/',
-    key: '.json?key=qRO17xCJNDBuG8WyLOU0pOgHavh2B2un',
-    searchCity: 'Milano' // fullUrl : url + searchCity + key,
-
+    key: '.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
+    searchCity: ''
   },
   methods: {
     searchApart: function searchApart() {
-      axios.get('https://api.tomtom.com/search/2/geocode/Milano.json?key=qRO17xCJNDBuG8WyLOU0pOgHavh2B2un').then(function (resp) {
+      axios.get(this.url + this.searchCity + this.key).then(function (resp) {
         console.log(resp, 'CALL TOMTOM');
       })["catch"](function (e) {
         console.error('Sorry! ' + e);
@@ -49939,7 +49938,6 @@ var app = new Vue({
   mounted: function mounted() {
     var _this = this;
 
-    //console.log(this.fullUrl, 'FULLurl')
     axios.get('/api/apartments').then(function (resp) {
       console.log(resp, 'PRIMA API CALL');
       _this.apartments = resp.data.data;
@@ -49977,9 +49975,10 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+/* window.axios = require('axios');
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; */
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

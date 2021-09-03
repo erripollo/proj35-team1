@@ -9,7 +9,7 @@
             <input type="search" class="form-control" name="" id="" aria-describedby="helpId" placeholder="" v-model='searchCity' >
         </div>
 
-
+        <button v-on:click ='searchApart'> try</button>
         {{-- Apart --}}
 
 
@@ -22,7 +22,7 @@
         </div>
 
 
-        <button v-on:click = 'searchApart'> try</button>
+        {{-- <button v-on:click = 'searchApart'> try</button> --}}
     </div>
 
 

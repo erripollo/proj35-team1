@@ -49921,13 +49921,27 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app',
   data: {
-    apartments: null
+    apartments: null,
+    url: 'https://api.tomtom.com/search/2/search/',
+    key: '.json?key=qRO17xCJNDBuG8WyLOU0pOgHavh2B2un',
+    searchCity: 'Milano' // fullUrl : url + searchCity + key,
+
+  },
+  methods: {
+    searchApart: function searchApart() {
+      axios.get('https://api.tomtom.com/search/2/geocode/Milano.json?key=qRO17xCJNDBuG8WyLOU0pOgHavh2B2un').then(function (resp) {
+        console.log(resp, 'CALL TOMTOM');
+      })["catch"](function (e) {
+        console.error('Sorry! ' + e);
+      });
+    }
   },
   mounted: function mounted() {
     var _this = this;
 
+    //console.log(this.fullUrl, 'FULLurl')
     axios.get('/api/apartments').then(function (resp) {
-      console.log(resp);
+      console.log(resp, 'PRIMA API CALL');
       _this.apartments = resp.data.data;
     })["catch"](function (e) {
       console.error('Sorry! ' + e);

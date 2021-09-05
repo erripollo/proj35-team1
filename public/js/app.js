@@ -49922,25 +49922,58 @@ var app = new Vue({
   el: '#app',
   data: {
     apartments: null,
+    services: null,
+    serviceSelected: [],
     url: 'https://api.tomtom.com/search/2/search/',
     key: '.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
-    searchCity: ''
+    searchCity: '',
+    searchRooms: '',
+    searchBeds: '',
+    range: '20',
+    lat1: 0,
+    lon1: 0,
+    filtered: []
   },
   methods: {
     searchApart: function searchApart() {
+      var _this = this;
+
       axios.get(this.url + this.searchCity + this.key).then(function (resp) {
         console.log(resp, 'CALL TOMTOM');
+        _this.lat1 = resp.data.results[0].position.lat;
+        _this.lon1 = resp.data.results[0].position.lon;
       })["catch"](function (e) {
         console.error('Sorry! ' + e);
+      });
+
+      function calcDistance(lat2, lon2) {
+        var distance;
+        distance = 6371 * 3.1415926 * Math.sqrt((lat2 - this.lat1) * (lat2 - this.lat1) + Math.cos(lat2 / 57.29578) * Math.cos(this.lat1 / 57.29578) * (lon2 - this.lon1) * (lon2 - this.lon1)) / 180;
+        console.log(distance);
+        return distance;
+      }
+
+      this.apartments.forEach(function (apartment) {
+        calcDistance(apartment.lat, apartment.lon);
+
+        if (distance <= _this.range) {
+          _this.filtered.push(apartment);
+        }
       });
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get('/api/apartments').then(function (resp) {
       console.log(resp, 'PRIMA API CALL');
-      _this.apartments = resp.data.data;
+      _this2.apartments = resp.data.data;
+    })["catch"](function (e) {
+      console.error('Sorry! ' + e);
+    });
+    axios.get('/api/services').then(function (resp) {
+      console.log(resp, 'PRIMA API CALL');
+      _this2.services = resp.data.data;
     })["catch"](function (e) {
       console.error('Sorry! ' + e);
     });
@@ -50082,8 +50115,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Diego\Desktop\BoolBnB\proj35-team1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Diego\Desktop\BoolBnB\proj35-team1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Erri/Library/Mobile Documents/com~apple~CloudDocs/Programmazione/Boolean/Corso/proj35-team1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/Erri/Library/Mobile Documents/com~apple~CloudDocs/Programmazione/Boolean/Corso/proj35-team1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

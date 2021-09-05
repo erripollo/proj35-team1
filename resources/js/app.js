@@ -28,17 +28,25 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- const app = new Vue({
+const app = new Vue({
     el: '#app',
     
     data: {
         apartments: null,
+        services: null,
+        serviceSelected: [],
 
         url:'https://api.tomtom.com/search/2/search/' ,
 
         key:'.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
 
         searchCity: '',
+        searchRooms: '',
+        searchBeds: '',
+        range: '20',
+        lat1: 0,
+        lon1: 0,
+        filtered: [],
         
         
     },
@@ -47,9 +55,30 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
         searchApart(){
             axios.get(this.url + this.searchCity + this.key).then(resp => {
                 console.log(resp, 'CALL TOMTOM');
+                this.lat1 = resp.data.results[0].position.lat;
+                this.lon1 = resp.data.results[0].position.lon;
             }).catch(e => {
                 console.error('Sorry! ' + e);
             })
+
+            function calcDistance(lat2, lon2) {
+                
+                var distance;
+
+                distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
+                console.log(distance);
+                return distance
+            }
+
+            this.apartments.forEach(apartment => {
+                calcDistance(apartment.lat, apartment.lon)
+                if (distance <= this.range) {
+                    this.filtered.push(apartment)
+                }
+            });
+
+
+            
         }
         
     },
@@ -63,5 +92,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
             console.error('Sorry! ' + e);
         }) 
 
+        axios.get('/api/services').then(resp => {
+            console.log(resp, 'PRIMA API CALL');
+            this.services = resp.data.data;
+        }).catch(e => {
+            console.error('Sorry! ' + e);
+        }) 
+
     }
 });
+

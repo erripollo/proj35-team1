@@ -29,8 +29,13 @@
         @enderror
 
         <div class="form-group">
-            <label for="city">EDIT CITY:</label>
-            <input type="text" name="city" id="city" class="form-control @error('city') is-invalid @enderror" placeholder="Add a city" aria-describedby="cityHelper" value="{{$apartment->city}}" required>
+          <label for="city">CITY:</label>
+          <input v-on:keyup="searchApart2" v-model="searchCity2" type="text" name="city" id="city" class="form-control @error('city') is-invalid @enderror" placeholder="Add a city, street, street nr." aria-describedby="cityHelper" value="{{$apartment->city}}" required>
+          <div v-show="showControl">
+              <ul v-for="item in autocomplete">
+                  <li @click="luogo(item)">@{{item.address.municipality}}, @{{item.address.countrySubdivision}}, @{{item.address.streetName}}, @{{item.address.streetNumber}}</li>
+              </ul>
+          </div>
         </div>
         @error('city')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -44,21 +49,21 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-       {{--  <div class="form-group">
+        <div class="form-group d-none">
             <label for="latitude">EDIT LATITUDE:</label>
-            <input type="number" step="0.000001" name="latitude" id="latitude" class="form-control @error('latitude') is-invalid @enderror" placeholder="Add a latitude" aria-describedby="latitudeHelper" value="{{$apartment->latitude}}" required>
+            <input v-model="latitudine" type="number" step="0.000001" name="latitude" id="latitude" class="form-control @error('latitude') is-invalid @enderror" placeholder="Add a latitude" aria-describedby="latitudeHelper" value="{{$apartment->latitude}}" required>
         </div>
         @error('latitude')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <div class="form-group">
+        <div class="form-group d-none">
             <label for="longitude">EDIT LONGITUDE:</label>
-            <input type="number" step="0.000001" name="longitude" id="longitude" class="form-control @error('longitude') is-invalid @enderror" placeholder="Add a longitude" aria-describedby="longitudeHelper" value="{{$apartment->longitude}}" required>
+            <input v-model="longitudine" type="number" step="0.000001" name="longitude" id="longitude" class="form-control @error('longitude') is-invalid @enderror" placeholder="Add a longitude" aria-describedby="longitudeHelper" value="{{$apartment->longitude}}" required>
         </div>
         @error('longitude')
         <div class="alert alert-danger">{{ $message }}</div>
-        @enderror --}}
+        @enderror
 
         {{-- current image --}}
         <div class="form-group">
@@ -108,6 +113,14 @@
         @error('n_beds')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+        <div class="form-group">
+          <label for="square_meters">EDIT SQUARE METERS:</label>
+          <input type="number" name="square_meters" id="square_meters" class="form-control @error('square_meters') is-invalid @enderror" placeholder="Add a square_meters" aria-describedby="square_metersHelper" value="{{ $apartment->square_meters }}" required>
+      </div>
+      @error('square_meters')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
 
         <div class="form-group">
             <label for="services">EDIT SERVICES:</label>

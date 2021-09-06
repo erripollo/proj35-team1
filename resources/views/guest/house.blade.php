@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @php
+    {{-- @php
     $lat1=45.1168763;
     $lon1=7.39455;
 
@@ -13,7 +13,7 @@
 
     echo $distance;
         
-    @endphp
+    @endphp --}}
 
     <div class="container-xl">
 
@@ -26,12 +26,12 @@
             
             <div class="form-group">
                 <label for="n_rooms">N. of rooms:</label>
-                <input type="number" name="n_rooms" id="n_rooms" class="form-control" placeholder="Add a n. of rooms" aria-describedby="n_roomsHelper" v-model="searchRooms">
+                <input type="number" name="n_rooms" id="n_rooms" class="form-control" placeholder="Add a n. of rooms" aria-describedby="n_roomsHelper" v-model="searchRooms" min="0">
             </div>
 
             <div class="form-group">
                 <label for="n_beds">N. of beds:</label>
-                <input type="number" name="n_beds" id="n_beds" class="form-control" placeholder="Add a n. of beds" aria-describedby="n_bedsHelper" v-model="searchBeds">
+                <input type="number" name="n_beds" id="n_beds" class="form-control" placeholder="Add a n. of beds" aria-describedby="n_bedsHelper" v-model="searchBeds" min="0">
             </div>
 
             <form>

@@ -35,12 +35,18 @@ const app = new Vue({
         apartments: null,
         services: null,
         serviceSelected: [],
-
         url:'https://api.tomtom.com/search/2/search/' ,
-
         key:'.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
-
+        
+        key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
         searchCity: '',
+        searchCity2: "",
+        autocomplete: [],
+        luogoObj: {},
+        latitudine: "",
+        longitudine: "",
+        showControl: true,
+
         searchRooms: '',
         searchBeds: '',
         range: '20',
@@ -51,8 +57,40 @@ const app = new Vue({
         
     },
     methods:{
+
+
+        searchApart2() {
+            axios
+                .get(this.url + this.searchCity2 + this.key2)
+                .then(resp => {
+                    console.log(resp, "CALL TOMTOM");
+                    this.autocomplete = resp.data.results;
+                    /*  this.lat1 = resp.data.results[0].position.lat;
+                    this.lon1 = resp.data.results[0].position.lon; */
+                })
+                .catch(e => {
+                    console.error("Sorry! " + e);
+                });
+
+                this.showControl = true;
+        },
+        luogo(item) {
+            console.log(item.address.municipality);
+            this.luogoObj = item;
+            //this.searchCity2 = "";
+            if (item.address.streetNumber && item.address.countrySubdivision && item.address.streetName && item.address.streetNumber) {
+                this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+            }else{
+                alert ('Inserire indirrizzo corretto (Città, Via, Numero civico)');
+                this.searchCity2 = '';
+            }
+            //this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+            this.latitudine = item.position.lat;
+            this.longitudine = item.position.lon;
+            this.showControl = false;
+        },
         
-        searchApart(){
+        /* searchApart(){
             axios.get(this.url + this.searchCity + this.key).then(resp => {
                 console.log(resp, 'CALL TOMTOM');
                 this.lat1 = resp.data.results[0].position.lat;
@@ -79,7 +117,7 @@ const app = new Vue({
 
 
             
-        }
+        } */
         
     },
 

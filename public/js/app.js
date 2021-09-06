@@ -49926,7 +49926,14 @@ var app = new Vue({
     serviceSelected: [],
     url: 'https://api.tomtom.com/search/2/search/',
     key: '.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
+    key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
     searchCity: '',
+    searchCity2: "",
+    autocomplete: [],
+    luogoObj: {},
+    latitudine: "",
+    longitudine: "",
+    showControl: true,
     searchRooms: '',
     searchBeds: '',
     range: '20',
@@ -49935,32 +49942,59 @@ var app = new Vue({
     filtered: []
   },
   methods: {
-    searchApart: function searchApart() {
+    searchApart2: function searchApart2() {
       var _this = this;
 
-      axios.get(this.url + this.searchCity + this.key).then(function (resp) {
-        console.log(resp, 'CALL TOMTOM');
-        _this.lat1 = resp.data.results[0].position.lat;
-        _this.lon1 = resp.data.results[0].position.lon;
+      axios.get(this.url + this.searchCity2 + this.key2).then(function (resp) {
+        console.log(resp, "CALL TOMTOM");
+        _this.autocomplete = resp.data.results;
+        /*  this.lat1 = resp.data.results[0].position.lat;
+        this.lon1 = resp.data.results[0].position.lon; */
       })["catch"](function (e) {
-        console.error('Sorry! ' + e);
+        console.error("Sorry! " + e);
       });
+      this.showControl = true;
+    },
+    luogo: function luogo(item) {
+      console.log(item.address.municipality);
+      this.luogoObj = item; //this.searchCity2 = "";
 
-      function calcDistance(lat2, lon2) {
-        var distance;
-        distance = 6371 * 3.1415926 * Math.sqrt((lat2 - this.lat1) * (lat2 - this.lat1) + Math.cos(lat2 / 57.29578) * Math.cos(this.lat1 / 57.29578) * (lon2 - this.lon1) * (lon2 - this.lon1)) / 180;
-        console.log(distance);
-        return distance;
-      }
+      if (item.address.streetNumber && item.address.countrySubdivision && item.address.streetName && item.address.streetNumber) {
+        this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+      } else {
+        alert('Inserire indirrizzo corretto (Città, Via, Numero civico)');
+        this.searchCity2 = '';
+      } //this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
 
-      this.apartments.forEach(function (apartment) {
-        calcDistance(apartment.lat, apartment.lon);
 
-        if (distance <= _this.range) {
-          _this.filtered.push(apartment);
-        }
-      });
+      this.latitudine = item.position.lat;
+      this.longitudine = item.position.lon;
+      this.showControl = false;
     }
+    /* searchApart(){
+        axios.get(this.url + this.searchCity + this.key).then(resp => {
+            console.log(resp, 'CALL TOMTOM');
+            this.lat1 = resp.data.results[0].position.lat;
+            this.lon1 = resp.data.results[0].position.lon;
+        }).catch(e => {
+            console.error('Sorry! ' + e);
+        })
+         function calcDistance(lat2, lon2) {
+            
+            var distance;
+             distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
+            console.log(distance);
+            return distance
+        }
+         this.apartments.forEach(apartment => {
+            calcDistance(apartment.lat, apartment.lon)
+            if (distance <= this.range) {
+                this.filtered.push(apartment)
+            }
+        });
+          
+    } */
+
   },
   mounted: function mounted() {
     var _this2 = this;

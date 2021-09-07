@@ -28,6 +28,4 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
 
 /* Guest routes */
 
-Route::get('house', function () {
-    return view('guest.house');
-})->name('house');
+Route::get('house', 'SearchController@index')->name('house');

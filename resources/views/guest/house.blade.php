@@ -21,55 +21,65 @@
             {{-- searchApart --}}
             <div class="form-group">
                 <label for="">Ricerca Città</label>
-                <input type="search" class="form-control" name="" id="" aria-describedby="helpId" placeholder="" v-model='searchCity' >
+                <input type="search" class="form-control" name="location" id="location" aria-describedby="helpId"
+                    placeholder="" value="{{ $homeCitySearch }}">
             </div>
-            
+
             <div class="form-group">
                 <label for="n_rooms">N. of rooms:</label>
-                <input type="number" name="n_rooms" id="n_rooms" class="form-control" placeholder="Add a n. of rooms" aria-describedby="n_roomsHelper" v-model="searchRooms" min="0">
+                <input type="number" name="n_rooms" id="n_rooms" class="form-control" placeholder="Add a n. of rooms"
+                    aria-describedby="n_roomsHelper" v-model="rooms" min="0">
             </div>
 
             <div class="form-group">
                 <label for="n_beds">N. of beds:</label>
-                <input type="number" name="n_beds" id="n_beds" class="form-control" placeholder="Add a n. of beds" aria-describedby="n_bedsHelper" v-model="searchBeds" min="0">
+                <input type="number" name="n_beds" id="n_beds" class="form-control" placeholder="Add a n. of beds"
+                    aria-describedby="n_bedsHelper" v-model="searchBeds" min="0">
             </div>
 
             <form>
                 <div class="form-group">
-                  <label for="formControlRange">Range Km @{{range}}</label>
-                  <input type="range" class="form-control-range" id="formControlRange" step="10" max="100" v-model="range">
+                    <label for="formControlRange">Range Km @{{ range }}</label>
+                    <input type="range" class="form-control-range" id="formControlRange" step="10" max="100" v-model="range">
                 </div>
             </form>
 
-            <div class="form-check" v-for="service in services" v-model="serviceSelected">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" :name="service.name" :id="service.name" :value="service.name" v-model="serviceSelected">
-                @{{ service.name }}
-              </label>
+            <div class="form-check" v-for="service in services">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" :name="service.name" :id="service.name"
+                        :value="service.name" v-model="serviceSelected">
+                    @{{ service . name }}
+                </label>
             </div>
-    
-            <button v-on:click ='searchApart'> try</button>
+
+            <button> try</button>
         </div>
 
         {{-- Apart --}}
-        <div class="card text-left mb-4" v-for="apartment in apartments"
-        v-if='apartment.city.toLowerCase().includes(searchCity.toLowerCase()) && searchCity.length > 0 && apartment.n_rooms >= searchRooms && apartment.n_beds >= searchBeds'>
+        @foreach ($apartments as $apartment)
 
-            <img class="card-img-top" src="holder.js/100px180/" alt="">
-            <div class="card-body">
-                <h4 class="card-title">@{{ apartment.title }}</h4>
-                <p>City: @{{ apartment.city }}</p>
-                <img :src=" 'storage/' + apartment.image " :alt="apartment.titles">
-                <p class="card-text">@{{ apartment.description }}</p>
-                <p>Rooms: @{{ apartment.n_rooms }}</p>
-                <p>Beds: @{{ apartment.n_beds }}</p>
-                <p>Service:</p>
-                <ul v-for="service in apartment.services">
-                    <li>@{{ service.name }}</li>
-                </ul>
+            <div class="card text-left mb-4">
 
+                <img class="card-img-top" src="holder.js/100px180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">{{ $apartment->title }}</h4>
+                    <p>City: {{ $apartment->address }}</p>
+                    <img src=" {{ 'storage/' . $apartment->image }}" alt="{{ $apartment->title }}">
+                    <p class="card-text">{{ $apartment->description }}</p>
+                    <p>Rooms: {{ $apartment->n_rooms }}</p>
+                    <p>Beds: {{ $apartment->n_beds }}</p>
+                    <p>Service:</p>
+
+                    @foreach ($apartment->services as $service)
+                        <ul>
+                            <li>{{ $service->name }}</li>
+                        </ul>
+
+                    @endforeach
+
+                </div>
             </div>
-        </div>
+        @endforeach
 
 
         {{-- <button v-on:click = 'searchApart'> try</button> --}}

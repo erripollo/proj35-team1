@@ -40,14 +40,14 @@ const app = new Vue({
         
         key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
         searchCity: '',
-        searchCity2: "",
+        location: "",
         autocomplete: [],
         luogoObj: {},
         latitudine: "",
         longitudine: "",
         showControl: true,
 
-        searchRooms: '',
+        rooms: '',
         searchBeds: '',
         range: '20',
         lat1: 0,
@@ -59,9 +59,9 @@ const app = new Vue({
     methods:{
 
 
-        searchApart2() {
+        autocompleteAddress() {
             axios
-                .get(this.url + this.searchCity2 + this.key2)
+                .get(this.url + this.location + this.key2)
                 .then(resp => {
                     console.log(resp, "CALL TOMTOM");
                     this.autocomplete = resp.data.results;
@@ -77,18 +77,39 @@ const app = new Vue({
         luogo(item) {
             console.log(item.address.municipality);
             this.luogoObj = item;
-            //this.searchCity2 = "";
+            //this.location = "";
             if (item.address.streetNumber && item.address.countrySubdivision && item.address.streetName && item.address.streetNumber) {
-                this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+                this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
             }else{
                 alert ('Inserire indirrizzo corretto (City, Street, Street number)');
-                this.searchCity2 = '';
+                this.location = '';
             }
-            //this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+            //this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
             this.latitudine = item.position.lat;
             this.longitudine = item.position.lon;
             this.showControl = false;
         },
+
+        searchHomePage(item){
+            console.log(item.address.municipality);
+            this.luogoObj = item;
+            this.location = item.address.municipality;
+            this.latitudine = item.position.lat;
+            this.longitudine = item.position.lon;
+
+            axios.get('/api/apartments', {params:{
+                address: this.location,
+            }}).then(resp => {
+                console.log(resp, 'PRIMA API CALL');
+                this.apartments = resp.data.data;
+            }).catch(e => {
+                console.error('Sorry! ' + e);
+            }) 
+
+            console.log(this.apartments);
+        }
+
+
         
         /* searchApart(){
             axios.get(this.url + this.searchCity + this.key).then(resp => {
@@ -123,12 +144,14 @@ const app = new Vue({
 
     mounted() {
 
-        axios.get('/api/apartments').then(resp => {
+        /* axios.get('/api/apartments', {params:{
+            address: this.location
+        }}).then(resp => {
             console.log(resp, 'PRIMA API CALL');
             this.apartments = resp.data.data;
         }).catch(e => {
             console.error('Sorry! ' + e);
-        }) 
+        })  */
 
         axios.get('/api/services').then(resp => {
             console.log(resp, 'PRIMA API CALL');

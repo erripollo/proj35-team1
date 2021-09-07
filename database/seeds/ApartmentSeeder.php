@@ -17,7 +17,6 @@ class ApartmentSeeder extends Seeder
         for ($i=0; $i < 10 ; $i++) { 
             $apartment = new Apartment();
             $apartment-> title = $faker->words(5, true);
-            $apartment-> city = $faker-> city();
             $apartment-> address = $faker-> streetAddress();
             $apartment-> latitude = $faker-> latitude($min = -90, $max = 90);
             $apartment-> longitude = $faker-> longitude($min = -180, $max = 180);

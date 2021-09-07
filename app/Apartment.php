@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Apartment extends Model
 {
-    protected $fillable = ['title', 'city', 'address', 'latitude', 'longitude', 'image', 'description', 'n_rooms', 'n_baths', 'n_beds', 'square_meters', 'visible', 'user_id'];
+    protected $fillable = ['title', 'address', 'latitude', 'longitude', 'image', 'description', 'n_rooms', 'n_baths', 'n_beds', 'square_meters', 'visible', 'user_id'];
 
     public function user(): BelongsTo
     {

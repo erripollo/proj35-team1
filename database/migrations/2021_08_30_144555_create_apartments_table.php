@@ -16,10 +16,9 @@ class CreateApartmentsTable extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('city', 50);
             $table->string('address');
-            $table->decimal('latitude', 8, 6)->nullable();
-            $table->decimal('longitude', 9, 6)->nullable();
+            $table->decimal('latitude', 8, 6);
+            $table->decimal('longitude', 9, 6);
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->unsignedTinyInteger('n_rooms');

@@ -28,25 +28,25 @@
         @enderror
 
         <div class="form-group">
-            <label for="city">City:</label>
-            <input v-on:keyup="searchApart2" v-model="searchCity2" type="text" name="city" id="city" class="form-control @error('city') is-invalid @enderror" placeholder="Add a city, street, street nr." aria-describedby="cityHelper" value="{{old('city')}}" required>
+            <label for="address">ADDRESS:</label>
+            <input v-on:keyup="searchApart2" v-model="searchCity2" type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" placeholder="Add a city, street, street nr." aria-describedby="addressHelper" value="{{old('address')}}" required>
             <div v-show="showControl">
                 <ul v-for="item in autocomplete">
                     <li @click="luogo(item)">@{{item.address.municipality}}, @{{item.address.countrySubdivision}}, @{{item.address.streetName}}, @{{item.address.streetNumber}}</li>
                 </ul>
             </div>
         </div>
-        @error('city')
+        @error('address')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <div class="form-group">
+       {{--  <div class="form-group">
             <label for="address">ADDRESS:</label>
             <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" placeholder="Add a address" aria-describedby="addressHelper" value="{{old('address')}}" required>
         </div>
         @error('address')
         <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        @enderror --}}
 
         <div class="form-group d-none">
             <label for="latitude">LATITUDE:</label>

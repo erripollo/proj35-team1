@@ -49,10 +49,9 @@ class ApartmentController extends Controller
     {
         $validate = $request->validate([ 
             'title'=>'required | max:255 | min: 4',
-            'city'=>'required | max:50 | min: 2',
             'address'=>'required | max:255 | min: 4',
-            'latitude'=>'nullable',
-            'longitude'=>'nullable',
+            'latitude'=>'required',
+            'longitude'=>'required',
             'image'=>'nullable | image | max: 150',
             'description'=>'nullable | min: 10',
             'n_rooms'=>'required | integer | min: 1',
@@ -139,10 +138,9 @@ class ApartmentController extends Controller
     {
         $validate = $request->validate([
             'title'=>'required | max:255 | min: 4',
-            'city'=>'required | max:50 | min: 2',
             'address'=>'required | max:255 | min: 4',
-            'latitude'=>'nullable',
-            'longitude'=>'nullable',
+            'latitude'=>'required',
+            'longitude'=>'required',
             'image'=>'nullable | image | max: 150',
             'description'=>'nullable | min: 10',
             'n_rooms'=>'required | integer | min: 1',

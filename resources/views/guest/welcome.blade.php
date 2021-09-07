@@ -81,18 +81,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    BoolBnB
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <div class="form-group">
+                      <label for="search_city"></label>
+                      <input type="text" class="form-control" name="search_city" id="search_city" aria-describedby="helpId" placeholder="Search City">
+                      <small id="helpId" class="form-text text-muted">Help text</small>
+                    </div>
                 </div>
             </div>
         </div>

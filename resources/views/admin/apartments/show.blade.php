@@ -9,9 +9,8 @@
                     <img class="card-img-top" src="{{ asset('storage/' . $apartment->image) }}" alt="">
                     <div class="card-body">
                         <h2 class="card-title">{{ $apartment->title }}</h2>
-                        <h4 class="card-title">{{ $apartment->city }}</h4>
-                        <p class="card-text">{{ $apartment->address }}</p>
-                        <p>{{ $apartment->description }}</p>
+                        <h4 class="card-title">{{ $apartment->address }}</h4>
+                        <p class="card-text">{{ $apartment->description }}</p>
                         <span>{{ $apartment->visible }}</span>
                     </div>
                 </div>

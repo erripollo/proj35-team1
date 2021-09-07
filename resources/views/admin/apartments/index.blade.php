@@ -19,7 +19,6 @@
                     <th>Image</th>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>City</th>
                     <th>Address</th>
                     <th>Visible</th>
                     <th>Action</th>
@@ -32,7 +31,6 @@
                     <td><img width="100" src="{{ asset('storage/' . $apartment->image) }}" alt="{{$apartment->title}}"></td>
                     <td>{{ $apartment->title }}</td>
                     <td>{{ Str::limit($apartment->description, 150, '...') }}</td>
-                    <td>{{ $apartment->city }}</td>
                     <td>{{ $apartment->address }}</td>
                     <td>{{ ($apartment->visible) ? 'YES' : 'NO' }}</td>
                 

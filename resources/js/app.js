@@ -81,7 +81,7 @@ const app = new Vue({
             if (item.address.streetNumber && item.address.countrySubdivision && item.address.streetName && item.address.streetNumber) {
                 this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
             }else{
-                alert ('Inserire indirrizzo corretto (Città, Via, Numero civico)');
+                alert ('Inserire indirrizzo corretto (City, Street, Street number)');
                 this.searchCity2 = '';
             }
             //this.searchCity2 = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;

@@ -161,31 +161,83 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                 localStorage.setItem('filteredApartments', parsed);
               },
      
-             newRange(){
-                 this.filteredApartments = [];
-     
-     
-                 function clacDistance(lat1, lon1, lat2, lon2) {
-                     var distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
-                     return distance
-                 }
-     
-                 for (let i = 0; i < this.apartments.length; i++) {
-                     const el = this.apartments[i];
-                     //console.log(parseFloat(el.latitude));
-                     //console.log(this.latitudine);
-                     var lat = parseFloat(el.latitude);
-                     var lon = parseFloat(el.longitude);
-                     var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
-                     console.log(distance, 'Distanza appartamento');
-     
-                     
-                     if (distance <= this.range) {
-                         this.filteredApartments.push(el);
-                         this.saveApartment();
-                     }
-                 }
-             }
+            newRange(){
+                this.filteredApartments = [];
+    
+    
+                function clacDistance(lat1, lon1, lat2, lon2) {
+                    var distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+                    return distance
+                }
+    
+                for (let i = 0; i < this.apartments.length; i++) {
+                    const el = this.apartments[i];
+                    //console.log(parseFloat(el.latitude));
+                    //console.log(this.latitudine);
+                    var lat = parseFloat(el.latitude);
+                    var lon = parseFloat(el.longitude);
+                    var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
+                    console.log(distance, 'Distanza appartamento');
+    
+                    
+                    if (distance <= this.range) {
+                        this.filteredApartments.push(el);
+                        this.saveApartment();
+                    }
+                }
+            },
+
+            checkFilter(){
+                
+                var temp = [];
+                /* var serviziTemp =[];
+
+                this.filteredApartments.forEach(apartment => {
+                    this.serviceSelected.forEach(servizio => {
+                        if (apartment.servizi.includes(servizio)) {
+                            console.log(servizio, 'servizio ci sta');
+                            serviziTemp.push(servizio)
+                        }
+                    });
+
+                    if(apartment.servizi.sort().join(',').includes(serviziTemp.sort().join(','))){
+                        alert('same members');
+                    }
+                    else alert('not a match');
+                });
+
+                if (apartment.servizi.every()) {
+                    
+                } */
+
+                
+                   /*  this.filteredApartments.forEach(apartment => {
+                        if (apartment.servizi.includes(this.serviceSelected)) {
+                            temp.push(apartment)
+                        }else if(temp.includes(apartment)) {
+                            temp.splice(apartment, 1)
+                        }
+                    })
+                
+                console.log(temp); */
+                console.log(temp, 'log prima ciclo');
+
+                this.filteredApartments.forEach(apartment => {
+                    if (this.serviceSelected.every(x => apartment.servizi.includes(x))) {
+                        temp.push(apartment)
+                        
+                    }
+                });
+
+                console.log(temp, 'log post ciclo');
+                
+                
+                
+
+                
+            }
+
+
      
      
              
@@ -225,6 +277,17 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
             axios.get('/api/apartments').then(resp => {
                 console.log(resp, 'PRIMA API CALL');
                 this.apartments = resp.data.data;
+
+                this.apartments.forEach(apartment => {
+                    //apartment.servizi = 'ciao';
+                    //console.log(apartment, 'ema console');
+                    apartment.servizi = [];
+                    apartment.services.forEach(serviceName => {
+                        apartment.servizi.push(serviceName.name)
+
+                    });
+                    console.log(apartment, 'log servizi array');
+                });
             }).catch(e => {
                 console.error('Sorry! ' + e);
             }) 

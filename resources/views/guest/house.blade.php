@@ -17,6 +17,7 @@
 
     <div class="container-xl">
 
+
         <div class="col-5">
             {{-- searchApart --}}
             <div class="form-group">
@@ -53,8 +54,8 @@
 
             <div class="form-check" v-for="service in services">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" :name="service.name" :id="service.name"
-                        :value="service.name" v-model="serviceSelected">
+                    <input v-on:change="checkFilter" type="checkbox" class="form-check-input" :name="service.name"
+                        :id="service.name" :value="service.name" v-model="serviceSelected">
                     @{{ service . name }}
                 </label>
             </div>

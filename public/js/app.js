@@ -50050,6 +50050,46 @@ var app = new Vue({
           this.saveApartment();
         }
       }
+    },
+    checkFilter: function checkFilter() {
+      var _this2 = this;
+
+      var temp = [];
+      /* var serviziTemp =[];
+       this.filteredApartments.forEach(apartment => {
+          this.serviceSelected.forEach(servizio => {
+              if (apartment.servizi.includes(servizio)) {
+                  console.log(servizio, 'servizio ci sta');
+                  serviziTemp.push(servizio)
+              }
+          });
+           if(apartment.servizi.sort().join(',').includes(serviziTemp.sort().join(','))){
+              alert('same members');
+          }
+          else alert('not a match');
+      });
+       if (apartment.servizi.every()) {
+          
+      } */
+
+      /*  this.filteredApartments.forEach(apartment => {
+           if (apartment.servizi.includes(this.serviceSelected)) {
+               temp.push(apartment)
+           }else if(temp.includes(apartment)) {
+               temp.splice(apartment, 1)
+           }
+       })
+                    console.log(temp); */
+
+      console.log(temp, 'log prima ciclo');
+      this.filteredApartments.forEach(function (apartment) {
+        if (_this2.serviceSelected.every(function (x) {
+          return apartment.servizi.includes(x);
+        })) {
+          temp.push(apartment);
+        }
+      });
+      console.log(temp, 'log post ciclo');
     }
     /* searchApart(){
         axios.get(this.url + this.searchCity + this.key).then(resp => {
@@ -50077,17 +50117,27 @@ var app = new Vue({
 
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get('/api/apartments').then(function (resp) {
       console.log(resp, 'PRIMA API CALL');
-      _this2.apartments = resp.data.data;
+      _this3.apartments = resp.data.data;
+
+      _this3.apartments.forEach(function (apartment) {
+        //apartment.servizi = 'ciao';
+        //console.log(apartment, 'ema console');
+        apartment.servizi = [];
+        apartment.services.forEach(function (serviceName) {
+          apartment.servizi.push(serviceName.name);
+        });
+        console.log(apartment, 'log servizi array');
+      });
     })["catch"](function (e) {
       console.error('Sorry! ' + e);
     });
     axios.get('/api/services').then(function (resp) {
       console.log(resp, 'CALL SERVICES');
-      _this2.services = resp.data.data;
+      _this3.services = resp.data.data;
     })["catch"](function (e) {
       console.error('Sorry! ' + e);
     });

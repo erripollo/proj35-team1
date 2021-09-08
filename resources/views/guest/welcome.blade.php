@@ -6,6 +6,7 @@
         <div>
             <form action="{{ route('house') }}" method="get">
                 @csrf
+
                 {{-- @method('GET') --}}
                 <div class="form-group d-flex">
                     <div>
@@ -18,7 +19,7 @@
                             </ul>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button v-on:click="persist" type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
             </form>

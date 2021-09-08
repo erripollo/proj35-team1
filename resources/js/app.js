@@ -28,138 +28,232 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-    
-    data: {
-        apartments: null,
-        services: null,
-        serviceSelected: [],
-        url:'https://api.tomtom.com/search/2/search/' ,
-        key:'.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
-        
-        key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
-        searchCity: '',
-        location: "",
-        autocomplete: [],
-        luogoObj: {},
-        latitudine: "",
-        longitudine: "",
-        showControl: true,
-
-        rooms: '',
-        searchBeds: '',
-        range: '20',
-        lat1: 0,
-        lon1: 0,
-        filtered: [],
-        
-        
-    },
-    methods:{
 
 
-        autocompleteAddress() {
-            axios
-                .get(this.url + this.location + this.key2)
-                .then(resp => {
-                    console.log(resp, "CALL TOMTOM");
-                    this.autocomplete = resp.data.results;
-                    /*  this.lat1 = resp.data.results[0].position.lat;
-                    this.lon1 = resp.data.results[0].position.lon; */
-                })
-                .catch(e => {
-                    console.error("Sorry! " + e);
-                });
 
-                this.showControl = true;
-        },
-        luogo(item) {
-            console.log(item.address.municipality);
-            this.luogoObj = item;
-            //this.location = "";
-            if (item.address.streetNumber && item.address.countrySubdivision && item.address.streetName && item.address.streetNumber) {
-                this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
-            }else{
-                alert ('Inserire indirrizzo corretto (City, Street, Street number)');
-                this.location = '';
-            }
-            //this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
-            this.latitudine = item.position.lat;
-            this.longitudine = item.position.lon;
-            this.showControl = false;
-        },
+     const app = new Vue({
+         el: '#app',
+         
+         data: {
+             apartments: null,
+             services: null,
+             serviceSelected: [],
+             url:'https://api.tomtom.com/search/2/search/' ,
+             key:'.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
+             
+             key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
+             searchCity: '',
+             location: null,
+             autocomplete: [],
+             luogoObj: {},
+             latitudine: '',
+             longitudine: '',
+             latApartment: '',
+             lonApartment: '',
+             showControl: true,
+             filteredApartments: [],
+     
+             rooms: '',
+             searchBeds: '',
+             range: '20',
+             lat1: 0,
+             lon1: 0,
+             filtered: [],
+             
+             
+         },
+         methods:{
+            
+            persist() {
+                localStorage.location = this.location;
+                localStorage.latitudine = this.latitudine;
+                localStorage.longitudine = this.longitudine;
+            },
+     
+            autocompleteAddress() {
+                 axios
+                     .get(this.url + this.location + this.key2)
+                     .then(resp => {
+                         console.log(resp, "CALL TOMTOM");
+                         this.autocomplete = resp.data.results;
+                         /*  this.lat1 = resp.data.results[0].position.lat;
+                         this.lon1 = resp.data.results[0].position.lon; */
+                     })
+                     .catch(e => {
+                         console.error("Sorry! " + e);
+                     });
+     
+                     this.showControl = true;
+             },
+             luogo(item) {
+                 console.log(item.address.municipality);
+                 this.luogoObj = item;
+                 //this.location = "";
+                 if (item.address.streetNumber && item.address.countrySubdivision && item.address.streetName && item.address.streetNumber) {
+                     this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+                 }else{
+                     alert ('Inserire indirrizzo corretto (City, Street, Street number)');
+                     this.location = '';
+                 }
+                 //this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+                 this.latitudine = item.position.lat;
+                 this.longitudine = item.position.lon;
+                 this.showControl = false;
+             },
+     
+             searchHomePage(item){
+                 console.log(item.address.municipality);
+                 this.luogoObj = item;
+                 this.location = item.address.municipality;
+                 this.latitudine = item.position.lat;
+                 this.longitudine = item.position.lon;
+                 this.filteredApartments = [];
+     
+                /*  axios.get('/api/apartments').then(resp => {
+                     console.log(resp, 'API APARTMENTS');
+                     this.apartments = resp.data.data;
+                 }).catch(e => {
+                     console.error('Sorry! ' + e);
+                 })  */
+     
+     
+                 //PROVA CALCOLO DISTANZA
+                 /* console.log(this.apartments, 'Log tutti apartment');
+                 var lat1 = 45.1168763;
+                 var lon1 = 7.39455;
+     
+                 var lat2 = 45.07022;
+                 var lon2 = 7.6842;
+     
+                 distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+     
+                 console.log(distance, 'log prova distanza');
+                 console.log(this.latitudine, this.longitudine);
+                 console.log(this.apartments[0].latitude, this.apartments[0].longitude); */
+     
+                 
+                 function clacDistance(lat1, lon1, lat2, lon2) {
+                     var distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+                     return distance
+                 }
+     
+                 for (let i = 0; i < this.apartments.length; i++) {
+                     const el = this.apartments[i];
+                     //console.log(parseFloat(el.latitude));
+                     //console.log(this.latitudine);
+                     var lat = parseFloat(el.latitude);
+                     var lon = parseFloat(el.longitude);
+                     var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
+                     console.log(distance, 'Distanza appartamento');
+     
+                     
+                     if (distance <= this.range) {
+                         this.filteredApartments.push(el);
+                         this.saveApartment();
+                     }
+                     
+                     
+                 }
+             },
 
-        searchHomePage(item){
-            console.log(item.address.municipality);
-            this.luogoObj = item;
-            this.location = item.address.municipality;
-            this.latitudine = item.position.lat;
-            this.longitudine = item.position.lon;
-
-            axios.get('/api/apartments', {params:{
-                address: this.location,
-            }}).then(resp => {
+             saveApartment() {
+                const parsed = JSON.stringify(this.filteredApartments);
+                localStorage.setItem('filteredApartments', parsed);
+              },
+     
+             newRange(){
+                 this.filteredApartments = [];
+     
+     
+                 function clacDistance(lat1, lon1, lat2, lon2) {
+                     var distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+                     return distance
+                 }
+     
+                 for (let i = 0; i < this.apartments.length; i++) {
+                     const el = this.apartments[i];
+                     //console.log(parseFloat(el.latitude));
+                     //console.log(this.latitudine);
+                     var lat = parseFloat(el.latitude);
+                     var lon = parseFloat(el.longitude);
+                     var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
+                     console.log(distance, 'Distanza appartamento');
+     
+                     
+                     if (distance <= this.range) {
+                         this.filteredApartments.push(el);
+                         this.saveApartment();
+                     }
+                 }
+             }
+     
+     
+             
+             /* searchApart(){
+                 axios.get(this.url + this.searchCity + this.key).then(resp => {
+                     console.log(resp, 'CALL TOMTOM');
+                     this.lat1 = resp.data.results[0].position.lat;
+                     this.lon1 = resp.data.results[0].position.lon;
+                 }).catch(e => {
+                     console.error('Sorry! ' + e);
+                 })
+     
+                 function calcDistance(lat2, lon2) {
+                     
+                     var distance;
+     
+                     distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
+                     console.log(distance);
+                     return distance
+                 }
+     
+                 this.apartments.forEach(apartment => {
+                     calcDistance(apartment.lat, apartment.lon)
+                     if (distance <= this.range) {
+                         this.filtered.push(apartment)
+                     }
+                 });
+     
+     
+                 
+             } */
+             
+         },
+     
+         mounted() {
+     
+            axios.get('/api/apartments').then(resp => {
                 console.log(resp, 'PRIMA API CALL');
                 this.apartments = resp.data.data;
             }).catch(e => {
                 console.error('Sorry! ' + e);
             }) 
-
-            console.log(this.apartments);
-        }
-
-
-        
-        /* searchApart(){
-            axios.get(this.url + this.searchCity + this.key).then(resp => {
-                console.log(resp, 'CALL TOMTOM');
-                this.lat1 = resp.data.results[0].position.lat;
-                this.lon1 = resp.data.results[0].position.lon;
+    
+            axios.get('/api/services').then(resp => {
+                console.log(resp, 'CALL SERVICES');
+                this.services = resp.data.data;
             }).catch(e => {
                 console.error('Sorry! ' + e);
-            })
+            }) 
 
-            function calcDistance(lat2, lon2) {
-                
-                var distance;
 
-                distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
-                console.log(distance);
-                return distance
+            /* Storage di location e coordinate */
+            if (localStorage.location) {
+            this.location = localStorage.location;
+            this.latitudine = localStorage.latitudine;
+            this.longitudine = localStorage.longitudine;
             }
 
-            this.apartments.forEach(apartment => {
-                calcDistance(apartment.lat, apartment.lon)
-                if (distance <= this.range) {
-                    this.filtered.push(apartment)
-                }
-            });
+            /* Storage filtered appartamnent */
+            if (localStorage.getItem('filteredApartments')) {
+            try {
+                this.filteredApartments = JSON.parse(localStorage.getItem('filteredApartments'));
+            } catch(e) {
+                localStorage.removeItem('filteredApartments');
+            }
+            }
+     
+         }
+    });
 
-
-            
-        } */
-        
-    },
-
-    mounted() {
-
-        /* axios.get('/api/apartments', {params:{
-            address: this.location
-        }}).then(resp => {
-            console.log(resp, 'PRIMA API CALL');
-            this.apartments = resp.data.data;
-        }).catch(e => {
-            console.error('Sorry! ' + e);
-        })  */
-
-        axios.get('/api/services').then(resp => {
-            console.log(resp, 'PRIMA API CALL');
-            this.services = resp.data.data;
-        }).catch(e => {
-            console.error('Sorry! ' + e);
-        }) 
-
-    }
-});
 

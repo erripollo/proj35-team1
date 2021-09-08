@@ -3,16 +3,16 @@
 @section('content')
 
     {{-- @php
-    $lat1=45.1168763;
-    $lon1=7.39455;
+    $lat1 = 45.1168763;
+    $lon1 = 7.39455;
 
-    $lat2=45.070220;
-    $lon2=7.684200;
+    $lat2 = 45.07022;
+    $lon2 = 7.6842;
 
-    $distance = (6371*3.1415926*sqrt(($lat2-$lat1)*($lat2-$lat1) + cos($lat2/57.29578)*cos($lat1/57.29578)*($lon2-$lon1)*($lon2-$lon1))/180);
+    $distance = (6371 * 3.1415926 * sqrt(($lat2 - $lat1) * ($lat2 - $lat1) + cos($lat2 / 57.29578) * cos($lat1 / 57.29578) * ($lon2 - $lon1) * ($lon2 - $lon1))) / 180;
 
     echo $distance;
-        
+
     @endphp --}}
 
     <div class="container-xl">
@@ -21,8 +21,14 @@
             {{-- searchApart --}}
             <div class="form-group">
                 <label for="">Ricerca Città</label>
-                <input type="search" class="form-control" name="location" id="location" aria-describedby="helpId"
-                    placeholder="" value="{{ $homeCitySearch }}">
+                <input type="search" v-on:keyup="autocompleteAddress" v-model="location" class="form-control"
+                    name="location" id="location" aria-describedby="helpId" placeholder="" value="{{ $homeCitySearch }}">
+                <div v-show="showControl">
+                    <ul v-for="item in autocomplete">
+                        <li @click="searchHomePage(item)">@{{ item . address . municipality }},
+                            @{{ item . address . countrySubdivision }}</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="form-group">
@@ -40,7 +46,8 @@
             <form>
                 <div class="form-group">
                     <label for="formControlRange">Range Km @{{ range }}</label>
-                    <input type="range" class="form-control-range" id="formControlRange" step="10" max="100" v-model="range">
+                    <input @click="newRange()" type="range" class="form-control-range" id="formControlRange" step="10"
+                        max="100" v-model="range">
                 </div>
             </form>
 
@@ -52,11 +59,11 @@
                 </label>
             </div>
 
-            <button> try</button>
+            <button @click="searchHomePage(item)"> try</button>
         </div>
 
         {{-- Apart --}}
-        @foreach ($apartments as $apartment)
+        {{-- @foreach ($apartments as $apartment)
 
             <div class="card text-left mb-4">
 
@@ -79,9 +86,30 @@
 
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
+
+        <div v-for="apartment in filteredApartments">
+            <div class="card text-left mb-4">
+
+                <img class="card-img-top" src="holder.js/100px180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">@{{ apartment . title }}</h4>
+                    <p>City: @{{ apartment . address }}</p>
+                    <img :src=" 'storage/' + apartment.image " :alt="apartment.title">
+                    <p class="card-text">@{{ apartment . description }}</p>
+                    <p>Rooms: @{{ apartment . n_rooms }}</p>
+                    <p>Beds: @{{ apartment . n_beds }}</p>
+                    <p>Service:</p>
+
+                    <ul v-for="service in apartment.services">
+                        <li>@{{ service . name }}</li>
+                    </ul>
 
 
+
+                </div>
+            </div>
+        </div>
         {{-- <button v-on:click = 'searchApart'> try</button> --}}
     </div>
 

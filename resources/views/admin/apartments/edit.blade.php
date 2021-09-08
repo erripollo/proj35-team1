@@ -33,7 +33,7 @@
                 <label for="address">EDIT ADDRESS:</label>
                 <input v-on:keyup="autocompleteAddress" type="text" name="address" id="address"
                     class="form-control @error('address') is-invalid @enderror" placeholder="Add a address"
-                    aria-describedby="addressHelper" value="{{ $apartment->address }}" v-model="searchCity2" required>
+                    aria-describedby="addressHelper" value="{{ $apartment->address }}" v-model="location" required>
                 <div v-show="showControl">
                     <ul v-for="item in autocomplete">
                         <li @click="luogo(item)">@{{ item . address . municipality }},

@@ -14,6 +14,8 @@ class SearchController extends Controller
     {
         //dd($request);
         $homeCitySearch = $request->location;
+        
+
         $apartments = ApartmentResource::collection(Apartment::with(['services'])
         //$apartmentTest = DB::table('apartments')
         /* ->join('apartment_service', 'apartment_service.apartment_id' , '=', 'apartments.id')

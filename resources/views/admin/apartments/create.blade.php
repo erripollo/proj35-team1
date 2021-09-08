@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label for="address">ADDRESS:</label>
-                <input v-on:keyup="autocompleteAddress" v-model="searchCity2" type="text" name="address" id="address"
+                <input v-on:keyup="autocompleteAddress" v-model="location" type="text" name="address" id="address"
                     class="form-control @error('address') is-invalid @enderror" placeholder="Add a city, street, street nr."
                     aria-describedby="addressHelper" value="{{ old('address') }}" required>
                 <div v-show="showControl">

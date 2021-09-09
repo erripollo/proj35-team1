@@ -17,12 +17,10 @@ Route::get('/', function () {
     return view('guest.welcome');
 });
 
+/* view apartment and send messages */
 Route::get('guest.apartment/{apartment}', 'SearchController@show')->name('guest.apartment.show');
 Route::post('message/{apartment}', 'SearchController@send')->name('send.message');
 
-/* route messages */
-Route::resource('messages', MessageController::class);
-//Route::post('messages/{apartment}'), 
 
 Auth::routes();
 
@@ -31,6 +29,7 @@ Auth::routes();
 Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('apartments', ApartmentController::class);
+    Route::resource('messages', MessageController::class);
 });
 
 /* Guest routes */

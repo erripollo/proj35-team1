@@ -1,7 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use DB;
+use App\User;
 use App\Apartment;
 use App\Message;
 use Illuminate\Http\Request;
@@ -15,7 +19,26 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Apartment::all();
+        $user = Auth::user();
+        $messages = DB::table('messages')
+            ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
+            ->join('users', 'apartments.user_id', '=', 'users.id')
+            ->where('apartments.user_id', '=', $user->id)
+            ->select(
+                'messages.name',
+                'messages.lastname', 
+                'messages.apartment_id', 
+                'apartments.title',
+                'messages.email',
+                'messages.body',  
+                'messages.created_at')
+            ->paginate(10);
+
+            //dd($messages);
+
+
+        return view('admin.messages.index', compact('user', 'messages', 'apartments'));
     }
 
     /**
@@ -34,20 +57,9 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Apartment $apartment)
+    public function store(Request $request)
     {
-        $apartment = Apartment::all();
-        dd($apartment);
-        $validate = $request->validate([ 
-            'name'=>'required | max:255 | min: 3',
-            'lastname'=>'required | max:255 | min: 3',
-            'email'=>'required',
-            'body'=>'required | min: 10'
-        ]);
-
-        $message = Message::create($validate);
-        $message->apartment_id = apartment()->id;
-        $message->save();
+        //
     }
 
     /**

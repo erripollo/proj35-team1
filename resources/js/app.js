@@ -39,7 +39,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
              services: null,
              serviceSelected: [],
              url:'https://api.tomtom.com/search/2/search/' ,
-             key:'.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
+             key:'.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA&typeahead=true',
              
              key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
              searchCity: '',
@@ -52,6 +52,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
              lonApartment: '',
              showControl: true,
              filteredApartments: [],
+             temp: [],
      
              rooms: '',
              searchBeds: '',
@@ -68,6 +69,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                 localStorage.location = this.location;
                 localStorage.latitudine = this.latitudine;
                 localStorage.longitudine = this.longitudine;
+
+                const parsed = JSON.stringify(this.filteredApartments);
+                localStorage.setItem('filteredApartments', parsed);
+
             },
      
             autocompleteAddress() {
@@ -84,7 +89,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                      });
      
                      this.showControl = true;
+
              },
+
+
              luogo(item) {
                  console.log(item.address.municipality);
                  this.luogoObj = item;
@@ -99,6 +107,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                  this.latitudine = item.position.lat;
                  this.longitudine = item.position.lon;
                  this.showControl = false;
+
+                 localStorage.location = '';
              },
      
              searchHomePage(item){
@@ -108,6 +118,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                  this.latitudine = item.position.lat;
                  this.longitudine = item.position.lon;
                  this.filteredApartments = [];
+                 
+
+                 /* if (item.address.municipality == this.location) {
+                     
+                     document.getElementById("search").classList.add('active');
+                     document.getElementById("search").classList.remove('disabled');
+                 } */
      
                 /*  axios.get('/api/apartments').then(resp => {
                      console.log(resp, 'API APARTMENTS');
@@ -154,6 +171,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                      
                      
                  }
+
+                 this.showControl = false;
+
+                 localStorage.location = '';
              },
 
              saveApartment() {
@@ -163,6 +184,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
      
             newRange(){
                 this.filteredApartments = [];
+                this.temp = [];
+                
     
     
                 function clacDistance(lat1, lon1, lat2, lon2) {
@@ -184,12 +207,45 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                         this.filteredApartments.push(el);
                         this.saveApartment();
                     }
+
                 }
+
+                this.filteredApartments.forEach(apartment => {
+                    if (this.serviceSelected.every(x => apartment.servizi.includes(x))) {
+                        this.temp.push(apartment)
+                        
+                    }
+                });
+
+                this.filteredApartments = this.temp
+
             },
 
             checkFilter(){
                 
-                var temp = [];
+                this.temp = [];
+                this.filteredApartments = [];
+
+                function clacDistance(lat1, lon1, lat2, lon2) {
+                    var distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+                    return distance
+                }
+    
+                for (let i = 0; i < this.apartments.length; i++) {
+                    const el = this.apartments[i];
+                    //console.log(parseFloat(el.latitude));
+                    //console.log(this.latitudine);
+                    var lat = parseFloat(el.latitude);
+                    var lon = parseFloat(el.longitude);
+                    var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
+                    console.log(distance, 'Distanza appartamento');
+    
+                    
+                    if (distance <= this.range) {
+                        this.filteredApartments.push(el);
+                        this.saveApartment();
+                    }
+                }
                 /* var serviziTemp =[];
 
                 this.filteredApartments.forEach(apartment => {
@@ -220,20 +276,25 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                     })
                 
                 console.log(temp); */
-                console.log(temp, 'log prima ciclo');
+                console.log(this.temp, 'log prima ciclo');
 
                 this.filteredApartments.forEach(apartment => {
                     if (this.serviceSelected.every(x => apartment.servizi.includes(x))) {
-                        temp.push(apartment)
+                        this.temp.push(apartment)
                         
                     }
                 });
 
-                console.log(temp, 'log post ciclo');
-                
-                
-                
+                this.filteredApartments = this.temp
 
+               /*  console.log(this.temp, 'log post ciclo');
+                if (this.temp.length <= 0) {
+                    this.temp.push(
+                        {
+                            title: 'Nessun risultato'
+                        }
+                    )
+                } */
                 
             }
 

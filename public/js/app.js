@@ -49925,7 +49925,7 @@ var app = new Vue({
     services: null,
     serviceSelected: [],
     url: 'https://api.tomtom.com/search/2/search/',
-    key: '.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
+    key: '.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA&typeahead=true',
     key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
     searchCity: '',
     location: null,
@@ -49937,6 +49937,7 @@ var app = new Vue({
     lonApartment: '',
     showControl: true,
     filteredApartments: [],
+    temp: [],
     rooms: '',
     searchBeds: '',
     range: '20',
@@ -49949,6 +49950,8 @@ var app = new Vue({
       localStorage.location = this.location;
       localStorage.latitudine = this.latitudine;
       localStorage.longitudine = this.longitudine;
+      var parsed = JSON.stringify(this.filteredApartments);
+      localStorage.setItem('filteredApartments', parsed);
     },
     autocompleteAddress: function autocompleteAddress() {
       var _this = this;
@@ -49978,6 +49981,7 @@ var app = new Vue({
       this.latitudine = item.position.lat;
       this.longitudine = item.position.lon;
       this.showControl = false;
+      localStorage.location = '';
     },
     searchHomePage: function searchHomePage(item) {
       console.log(item.address.municipality);
@@ -49986,6 +49990,12 @@ var app = new Vue({
       this.latitudine = item.position.lat;
       this.longitudine = item.position.lon;
       this.filteredApartments = [];
+      /* if (item.address.municipality == this.location) {
+          
+          document.getElementById("search").classList.add('active');
+          document.getElementById("search").classList.remove('disabled');
+      } */
+
       /*  axios.get('/api/apartments').then(resp => {
            console.log(resp, 'API APARTMENTS');
            this.apartments = resp.data.data;
@@ -50023,12 +50033,53 @@ var app = new Vue({
           this.saveApartment();
         }
       }
+
+      this.showControl = false;
+      localStorage.location = '';
     },
     saveApartment: function saveApartment() {
       var parsed = JSON.stringify(this.filteredApartments);
       localStorage.setItem('filteredApartments', parsed);
     },
     newRange: function newRange() {
+      var _this2 = this;
+
+      this.filteredApartments = [];
+      this.temp = [];
+
+      function clacDistance(lat1, lon1, lat2, lon2) {
+        var distance = 6371 * 3.1415926 * Math.sqrt((lat2 - lat1) * (lat2 - lat1) + Math.cos(lat2 / 57.29578) * Math.cos(lat1 / 57.29578) * (lon2 - lon1) * (lon2 - lon1)) / 180;
+        return distance;
+      }
+
+      for (var i = 0; i < this.apartments.length; i++) {
+        var el = this.apartments[i]; //console.log(parseFloat(el.latitude));
+        //console.log(this.latitudine);
+
+        var lat = parseFloat(el.latitude);
+        var lon = parseFloat(el.longitude);
+        var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
+        console.log(distance, 'Distanza appartamento');
+
+        if (distance <= this.range) {
+          this.filteredApartments.push(el);
+          this.saveApartment();
+        }
+      }
+
+      this.filteredApartments.forEach(function (apartment) {
+        if (_this2.serviceSelected.every(function (x) {
+          return apartment.servizi.includes(x);
+        })) {
+          _this2.temp.push(apartment);
+        }
+      });
+      this.filteredApartments = this.temp;
+    },
+    checkFilter: function checkFilter() {
+      var _this3 = this;
+
+      this.temp = [];
       this.filteredApartments = [];
 
       function clacDistance(lat1, lon1, lat2, lon2) {
@@ -50050,11 +50101,6 @@ var app = new Vue({
           this.saveApartment();
         }
       }
-    },
-    checkFilter: function checkFilter() {
-      var _this2 = this;
-
-      var temp = [];
       /* var serviziTemp =[];
        this.filteredApartments.forEach(apartment => {
           this.serviceSelected.forEach(servizio => {
@@ -50081,15 +50127,24 @@ var app = new Vue({
        })
                     console.log(temp); */
 
-      console.log(temp, 'log prima ciclo');
+
+      console.log(this.temp, 'log prima ciclo');
       this.filteredApartments.forEach(function (apartment) {
-        if (_this2.serviceSelected.every(function (x) {
+        if (_this3.serviceSelected.every(function (x) {
           return apartment.servizi.includes(x);
         })) {
-          temp.push(apartment);
+          _this3.temp.push(apartment);
         }
       });
-      console.log(temp, 'log post ciclo');
+      this.filteredApartments = this.temp;
+      /*  console.log(this.temp, 'log post ciclo');
+       if (this.temp.length <= 0) {
+           this.temp.push(
+               {
+                   title: 'Nessun risultato'
+               }
+           )
+       } */
     }
     /* searchApart(){
         axios.get(this.url + this.searchCity + this.key).then(resp => {
@@ -50117,13 +50172,13 @@ var app = new Vue({
 
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this4 = this;
 
     axios.get('/api/apartments').then(function (resp) {
       console.log(resp, 'PRIMA API CALL');
-      _this3.apartments = resp.data.data;
+      _this4.apartments = resp.data.data;
 
-      _this3.apartments.forEach(function (apartment) {
+      _this4.apartments.forEach(function (apartment) {
         //apartment.servizi = 'ciao';
         //console.log(apartment, 'ema console');
         apartment.servizi = [];
@@ -50137,7 +50192,7 @@ var app = new Vue({
     });
     axios.get('/api/services').then(function (resp) {
       console.log(resp, 'CALL SERVICES');
-      _this3.services = resp.data.data;
+      _this4.services = resp.data.data;
     })["catch"](function (e) {
       console.error('Sorry! ' + e);
     });

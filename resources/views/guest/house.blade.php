@@ -29,6 +29,11 @@
                         <li @click="searchHomePage(item)">@{{ item . address . municipality }},
                             @{{ item . address . countrySubdivision }}</li>
                     </ul>
+                    {{-- <div class="list-group">
+                        <a v-for="item in autocomplete" @click="searchHomePage(item)" href="#"
+                            class="list-group-item list-group-item-action">@{{ item . address . municipality }},
+                            @{{ item . address . countrySubdivision }}</a>
+                    </div> --}}
                 </div>
             </div>
 
@@ -54,8 +59,8 @@
 
             <div class="form-check" v-for="service in services">
                 <label class="form-check-label">
-                    <input v-on:change="checkFilter" type="checkbox" class="form-check-input" :name="service.name"
-                        :id="service.name" :value="service.name" v-model="serviceSelected">
+                    <input v-on:change="checkFilter" v-on:check type="checkbox" class="form-check-input"
+                        :name="service.name" :id="service.name" :value="service.name" v-model="serviceSelected">
                     @{{ service . name }}
                 </label>
             </div>
@@ -89,9 +94,9 @@
             </div>
         @endforeach --}}
 
-        <div v-for="apartment in filteredApartments">
-            <div class="card text-left mb-4">
 
+        <div v-for="apartment in filteredApartments">
+            <div class="card text-left mb-4" v-if="apartment.n_rooms >= rooms && apartment.n_beds >= searchBeds">
                 <img class="card-img-top" src="holder.js/100px180/" alt="">
                 <div class="card-body">
                     <h4 class="card-title">@{{ apartment . title }}</h4>
@@ -105,12 +110,28 @@
                     <ul v-for="service in apartment.services">
                         <li>@{{ service . name }}</li>
                     </ul>
-
-
-
                 </div>
             </div>
         </div>
+
+        {{-- <div v-if="temp.length > 0" v-for="apartment in temp">
+            <div class="card text-left mb-4">
+                <img class="card-img-top" src="holder.js/100px180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">@{{ apartment . title }}</h4>
+                    <p>City: @{{ apartment . address }}</p>
+                    <img :src=" 'storage/' + apartment.image " :alt="apartment.title">
+                    <p class="card-text">@{{ apartment . description }}</p>
+                    <p>Rooms: @{{ apartment . n_rooms }}</p>
+                    <p>Beds: @{{ apartment . n_beds }}</p>
+                    <p>Service:</p>
+
+                    <ul v-for="service in apartment.services">
+                        <li>@{{ service . name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div> --}}
         {{-- <button v-on:click = 'searchApart'> try</button> --}}
     </div>
 

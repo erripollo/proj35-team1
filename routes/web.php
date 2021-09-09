@@ -18,6 +18,11 @@ Route::get('/', function () {
 });
 
 Route::get('guest.apartment/{apartment}', 'SearchController@show')->name('guest.apartment.show');
+Route::post('message/{apartment}', 'SearchController@send')->name('send.message');
+
+/* route messages */
+Route::resource('messages', MessageController::class);
+//Route::post('messages/{apartment}'), 
 
 Auth::routes();
 

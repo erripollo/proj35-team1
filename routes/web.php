@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('guest.welcome');
 });
 
+Route::get('guest.apartment/{apartment}', 'SearchController@show')->name('guest.apartment.show');
+
 Auth::routes();
 
 /* Admin routes */

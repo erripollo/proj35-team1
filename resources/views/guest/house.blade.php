@@ -111,6 +111,8 @@
                         <li>@{{ service . name }}</li>
                     </ul>
                 </div>
+                <a name="" id="" class="btn btn-primary" :href="'guest.apartment/' + apartment.id " role="button">Go to
+                    apartment</a>
             </div>
         </div>
 

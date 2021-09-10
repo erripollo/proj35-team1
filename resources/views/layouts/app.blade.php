@@ -22,8 +22,11 @@
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
 
+
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -68,7 +71,7 @@
                                     <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Admin</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                             document.getElementById('logout-form').submit();">
+                                                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -88,9 +91,7 @@
             @yield('content')
         </main>
     </div>
-    {{-- <script>
-        window.addEventListener("DOMContentLoaded", firstsearch('{{ $homeCitySearch }}'))
-    </script> --}}
+
 </body>
 
 </html>

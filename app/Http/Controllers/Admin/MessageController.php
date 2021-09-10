@@ -26,10 +26,13 @@ class MessageController extends Controller
             ->join('users', 'apartments.user_id', '=', 'users.id')
             ->where('apartments.user_id', '=', $user->id)
             ->select(
+                'messages.id',
                 'messages.name',
                 'messages.lastname', 
                 'messages.apartment_id', 
                 'apartments.title',
+                'apartments.image',
+                'apartments.address',
                 'messages.email',
                 'messages.body',  
                 'messages.created_at')
@@ -70,7 +73,14 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
+        $apartment_id = $message->apartment_id;
+        $apartments = Apartment::where('id', '=', $apartment_id)->get();
+        $apartment = $apartments[0];
+
+        //dd($message, $apartment[0]);
+
+        return view('admin.messages.show', compact('message', 'apartment'));
+        
     }
 
     /**
@@ -104,6 +114,9 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+       
+        $message->delete();
+        
+        return redirect()->route('admin.messages.index');
     }
 }

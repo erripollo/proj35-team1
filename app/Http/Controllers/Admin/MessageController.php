@@ -19,6 +19,8 @@ class MessageController extends Controller
      */
     public function index()
     {
+        
+
         $apartments = Apartment::all();
         $user = Auth::user();
         $messages = DB::table('messages')
@@ -73,6 +75,8 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
+        
+
         $apartment_id = $message->apartment_id;
         $apartments = Apartment::where('id', '=', $apartment_id)->get();
         $apartment = $apartments[0];

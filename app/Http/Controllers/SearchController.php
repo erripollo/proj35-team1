@@ -8,6 +8,8 @@ use App\User;
 use App\Message;
 use App\Apartment;
 use App\Service;
+use App\Visit;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\ApartmentResource;
@@ -19,12 +21,12 @@ class SearchController extends Controller
         //dd($request);
         $homeCitySearch = $request->location;
 
-        function calcDistance($lat1, $lon1, $lat2, $lon2)
+        /* function calcDistance($lat1, $lon1, $lat2, $lon2)
         {
             $distance = (6371 * 3.1415926 * sqrt(($lat2 - $lat1) * ($lat2 - $lat1) + cos($lat2 / 57.29578) * cos($lat1 / 57.29578) * ($lon2 - $lon1) * ($lon2 - $lon1))) / 180;
 
             return $distance;
-        }
+        } */
 
         
 
@@ -34,7 +36,7 @@ class SearchController extends Controller
         ->join('services', 'apartment_service.service_id' , '=', 'services.id')
         ->select('apartments.*','apartment_service.*') */
         ->where('visible', true )
-        ->select('SELECT clacDistance($latProva, $lonProva, "apartments.latitude", "apartment.longitude" )')
+        //->select('SELECT clacDistance($latProva, $lonProva, "apartments.latitude", "apartment.longitude" )')
         //->where('address', 'like', $homeCitySearch.'%')
         ->get());
         //return response()->json($apartmentTest);
@@ -48,6 +50,7 @@ class SearchController extends Controller
 
     public function show(Apartment $apartment)
     {
+        //dd($apartment);
         $services = Service::all();
         if (Auth::user()) {
             $user = Auth::user()->email;
@@ -57,6 +60,36 @@ class SearchController extends Controller
         //dd($user);
         //dd($user);
         //$apartment = Apartment::all();
+
+        /* Count views */
+        $ip = Request()->ip();
+        //dd($ip);
+        //$flats = Flat::where('slug', $slug)->first();
+  
+       
+        $lastVisit = DB::table('visits')
+          ->select('*')
+          ->where('apartment_id', $apartment->id)
+          ->orderby('visits.id', 'desc')
+          ->first();
+          if(!isset($lastVisit->created_at)){
+            $newVisit = new Visit;
+            $newVisit->ip_address = $ip;
+            $newVisit->apartment_id = $apartment->id;
+            $saved = $newVisit->save();
+          } else {
+            $myDate = new Carbon($lastVisit->created_at);
+            $control = new Carbon($lastVisit->created_at);
+            $control = $control->addHour(1);
+            if (!Carbon::now()->lessThan($control)) {
+              $newVisit = new Visit;
+              $newVisit->ip_address = $ip;
+              $newVisit->apartment_id = $apartment->id;
+              $saved = $newVisit->save();
+            }
+          }
+
+
         return view('guest.apartments.show', compact('apartment', 'services', 'user'));
     }
 

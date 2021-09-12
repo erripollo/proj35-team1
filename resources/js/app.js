@@ -298,11 +298,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
             },
 
             showMap(lat, long) {
-
-
+                
                 coordinates = [long,lat]
                 
-
                 tt.setProductInfo('<test>', '<beta>');
                 var map = tt.map({
                     key: 'WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',

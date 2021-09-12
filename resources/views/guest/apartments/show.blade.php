@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container" v-on:mouseover="showMap({{ $apartment->latitude }}, {{ $apartment->longitude }})">
         @if (session('message'))
             <div class="alert alert-success" role="alert">
 
@@ -69,7 +69,6 @@
         </div>
         
        <div class="container">
-            <button id="show-map-button"  v-on:click="showMap({{ $apartment->latitude }}, {{ $apartment->longitude }})" type="button" >SHOW ON MAP</button>
             <div id="map" class="map mt-3"></div> 
         </div>           
     </div>

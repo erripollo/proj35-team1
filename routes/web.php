@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 /* view apartment and send messages */
-Route::get('guest.apartment/{apartment}', 'SearchController@show')->name('guest.apartment.show');
+Route::get('guest/apartment/{apartment}', 'SearchController@show')->name('guest.apartment.show');
 Route::post('message/{apartment}', 'SearchController@send')->name('send.message');
 
 
@@ -30,6 +30,7 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('apartments', ApartmentController::class);
     Route::resource('messages', MessageController::class);
+    Route::get('/stats/{id}', 'HomeController@stats')->name('stats');
 });
 
 /* Guest routes */

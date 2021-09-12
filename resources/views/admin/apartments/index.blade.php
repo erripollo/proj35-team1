@@ -38,6 +38,7 @@
 
                         <td class="text-center d-flex flex-column">
                             <a href="{{ route('admin.stats', $apartment->id) }}">stats</a>
+                            <a href="{{ route('admin.buySponsorship', $apartment->id) }}">sponsor</a>
                             <a href="{{ route('admin.apartments.show', $apartment->id) }}" class="btn btn-primary">
                                 <i class="fas fa-eye fa-sm fa-fw"></i>
                             </a>

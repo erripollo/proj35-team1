@@ -30,8 +30,12 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('apartments', ApartmentController::class);
     Route::resource('messages', MessageController::class);
-    Route::get('/stats/{id}', 'HomeController@stats')->name('stats');
+    Route::get('/stats/{apartment}', 'HomeController@stats')->name('stats');
+    // Payment
+    Route::get('sponsors/{apartment}', 'SponsorController@buySponsorship')->name('buySponsorship');
+    Route::post('checkout/{apartment}', 'PaymentController@checkout')->name('checkout');
 });
+
 
 /* Guest routes */
 

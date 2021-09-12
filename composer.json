@@ -15,7 +15,8 @@
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
-        "nesbot/carbon": "^2.53"
+        "nesbot/carbon": "^2.53",
+        "braintree/braintree_php" : "6.4.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

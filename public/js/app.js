@@ -50145,6 +50145,21 @@ var app = new Vue({
                }
            )
        } */
+    },
+    showMap: function showMap(lat, _long) {
+      coordinates = [_long, lat];
+      tt.setProductInfo('<test>', '<beta>');
+      var map = tt.map({
+        key: 'WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
+        container: 'map',
+        language: 'italian',
+        style: 'tomtom://vector/1/basic-main',
+        center: coordinates,
+        zoom: 12
+      });
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
+      var marker = new tt.Marker().setLngLat(coordinates).addTo(map);
     }
     /* searchApart(){
         axios.get(this.url + this.searchCity + this.key).then(resp => {
@@ -50167,7 +50182,8 @@ var app = new Vue({
                 this.filtered.push(apartment)
             }
         });
-                    
+              
+        
     } */
 
   },
@@ -50351,8 +50367,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/Erri/Library/Mobile Documents/com~apple~CloudDocs/Programmazione/Boolean/Corso/proj35-team1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/Erri/Library/Mobile Documents/com~apple~CloudDocs/Programmazione/Boolean/Corso/proj35-team1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/php/proj35-team1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/php/proj35-team1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

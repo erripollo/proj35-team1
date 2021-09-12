@@ -67,6 +67,13 @@
                 </div>
             </div>
         </div>
-
+        
+       <div class="container">
+            <button id="show-map-button"  v-on:click="showMap({{ $apartment->latitude }}, {{ $apartment->longitude }})" type="button" >SHOW ON MAP</button>
+            <div id="map" class="map mt-3"></div> 
+        </div>           
     </div>
+
 @endsection
+
+

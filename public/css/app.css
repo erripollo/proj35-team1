@@ -10942,3 +10942,8 @@ a.text-dark:focus {
   }
 }
 
+#map {
+  height: 50vh;
+  width: 50vw;
+}
+

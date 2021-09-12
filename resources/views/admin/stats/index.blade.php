@@ -6,7 +6,7 @@
         {{-- <canvas id="myChart" width="400" height="400"></canvas> --}}
 
         <div class="container">
-            <h1>
+            <h1 class="mb-3">
                 <span class="username">
                     {{ $user->name }}
                 </span>
@@ -14,7 +14,7 @@
             </h1>
 
 
-            <a name="" id="" class="btn btn-primary" href="#" role="button" v-on:click="generateData('views')"
+            <a name="" id="" class="btn btn-primary mr-3" href="#" role="button" v-on:click="generateData('views')"
                 v-bind:class="(graphType == 'views') ? 'active' : ''">Visualizzazioni</a>
             {{-- <li v-bind:class="(graphType == 'views') ? 'active' : ''">
                     <a class="button-link" v-on:click="generateData('views')">Visualizzazioni</a>
@@ -28,13 +28,17 @@
 
             <div class="wrapper-statistics">
                 <aside>
-                    <ul class="years-list">
+                    <a class="btn btn-outline-secondary btn-sm my-4 mr-2" v-for="year in years"
+                        v-on:click="generateStats(year)">
+                        @{{ year }}
+                    </a>
+                    {{-- <ul class="years-list">
                         <li v-for="year in years">
                             <a v-on:click="generateStats(year)">
                                 @{{ year }}
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </aside>
                 <div class="wrapper-graph">
                     <div class="no-stats-text" v-if="noStats">Non ci sono statistiche da visualizzare!</div>

@@ -21,7 +21,6 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -296,8 +295,27 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                     )
                 } */
                 
-            }
+            },
 
+            showMap(lat, long) {
+                
+                coordinates = [long,lat]
+                
+                tt.setProductInfo('<test>', '<beta>');
+                var map = tt.map({
+                    key: 'WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
+                    container: 'map',
+                    language: 'italian',
+                    style: 'tomtom://vector/1/basic-main',
+                    center: coordinates,
+                    zoom: 12,
+                });
+                
+                map.addControl(new tt.FullscreenControl());
+                map.addControl(new tt.NavigationControl());
+                var marker = new tt.Marker().setLngLat(coordinates).addTo(map);
+
+            }
 
      
      
@@ -327,9 +345,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                      }
                  });
      
-     
+                 
                  
              } */
+             
              
          },
      
@@ -376,8 +395,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
                 localStorage.removeItem('filteredApartments');
             }
             }
-     
-         }
+            
+
+        }
     });
 
 

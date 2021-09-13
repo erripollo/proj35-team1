@@ -13,6 +13,8 @@
         <h2>Nothing to display</h2>
 
     @else
+
+        <h1>Test diego</h1>
         <div class="d-flex flex-wrap justify-content-center">
             @foreach ($apartments as $apartment)
                 <div class="card m-3 shadow" style="width: 350px;">

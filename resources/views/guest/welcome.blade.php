@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container d-flex flex-column align-items-center">
-        <h1 class="mb-4">BoolBnb</h1>
+        <h1 class="mb-4">BoolBnb Hello hello</h1>
         <div>
             <form action="{{ route('house') }}" method="get">
                 @csrf

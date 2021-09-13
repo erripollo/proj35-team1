@@ -16,7 +16,7 @@ class CreateVisitsTable extends Migration
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
             $table->string('ip_address');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

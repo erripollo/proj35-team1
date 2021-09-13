@@ -2,22 +2,9 @@
 
 @section('content')
 
-    {{-- @php
-    $lat1 = 45.1168763;
-    $lon1 = 7.39455;
-
-    $lat2 = 45.07022;
-    $lon2 = 7.6842;
-
-    $distance = (6371 * 3.1415926 * sqrt(($lat2 - $lat1) * ($lat2 - $lat1) + cos($lat2 / 57.29578) * cos($lat1 / 57.29578) * ($lon2 - $lon1) * ($lon2 - $lon1))) / 180;
-
-    echo $distance;
-
-    @endphp --}}
-
     <div class="container">
 
-        <h3>Advanced Search</h3>
+        <h3>Ricerca avanzata</h3>
         <div class="row">
             <div class="col-6 pr-5">
                 {{-- searchApart --}}
@@ -40,29 +27,27 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="n_rooms">N. of rooms:</label>
+                    <label for="n_rooms">N. di stanze:</label>
                     <input type="number" name="n_rooms" id="n_rooms" class="form-control" placeholder="Add a n. of rooms"
                         aria-describedby="n_roomsHelper" v-model="rooms" min="0">
                 </div>
 
                 <div class="form-group">
-                    <label for="n_beds">N. of beds:</label>
+                    <label for="n_beds">N. di letti:</label>
                     <input type="number" name="n_beds" id="n_beds" class="form-control" placeholder="Add a n. of beds"
                         aria-describedby="n_bedsHelper" v-model="searchBeds" min="0">
                 </div>
 
                 <form>
                     <div class="form-group">
-                        <label for="formControlRange">Range Km @{{ range }}</label>
+                        <label for="formControlRange">Distanza Km @{{ range }}</label>
                         <input @click="newRange()" type="range" class="form-control-range" id="formControlRange" step="10"
                             max="100" v-model="range">
                     </div>
                 </form>
-
-                <button @click="searchHomePage(item)"> try</button>
             </div>
             <div class="col-6">
-                <h5>Services</h5>
+                <h5>Servizi</h5>
                 <div class="d-flex flex-column flex-wrap" style="height: 250px">
                     <div class="form-check" v-for="service in services">
                         <label class="form-check-label">
@@ -102,7 +87,7 @@
             </div>
         @endforeach --}}
 
-        <div class="d-flex flex-wrap justify-content-center">
+        <div class="d-flex flex-wrap justify-content-center mt-5">
 
 
             {{-- <div class="card mb-3">
@@ -125,21 +110,23 @@
                         </div>
                     </div>
                 </div> --}}
-            <div class="card text-left m-2" v-for="apartment in filteredApartments"
+            <div class="card text-left m-2 shadow" v-for="apartment in filteredApartments"
                 v-if="apartment.n_rooms >= rooms && apartment.n_beds >= searchBeds" style="width: 350px">
-                <img class="card-img-top" :src=" 'storage/' + apartment.image " :alt="apartment.title">
+                <img height="230px" width="100%" class="card-img-top" :src=" 'storage/' + apartment.image "
+                    :alt="apartment.title">
                 <div class="card-body">
                     <h4 class="card-title">@{{ apartment . title }}</h4>
                     {{-- <img :src=" 'storage/' + apartment.image " :alt="apartment.title"> --}}
                     <p class="card-text">@{{ apartment . description }}</p>
-                    <p>City: @{{ apartment . address }}</p>
-                    <p>Rooms: @{{ apartment . n_rooms }}</p>
-                    <p>Beds: @{{ apartment . n_beds }}</p>
-                    <p class="card-text"><small class="text-muted"
+                    <p><i class="fas fa-map-marker-alt"></i> @{{ apartment . address }}</p>
+                    <p><i class="fas fa-door-open"></i> @{{ apartment . n_rooms }} stanze</p>
+                    <p><i class="fas fa-bed"></i> @{{ apartment . n_beds }}</p>
+                    <p class="card-text"><small class="text-muted m-2"
                             v-for="service in apartment.services">@{{ service . name }} </small></p>
                 </div>
-                <a name="" id="" class="btn btn-primary" :href="'guest/apartment/' + apartment.id " role="button">Go to
-                    apartment</a>
+                <a name="" id="" class="btn btn-outline-info my-3 mx-5" :href="'guest/apartment/' + apartment.id "
+                    role="button"><i class="fas fa-home"></i> Visita
+                    l'appartamento</a>
             </div>
 
         </div>

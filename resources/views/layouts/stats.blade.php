@@ -72,7 +72,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -100,15 +100,15 @@
                             </li>
                             <li class="nav-item nav-pills">
                                 <a class="nav-link {{ Route::currentRouteName() === 'admin.apartments.index' ? 'active' : '' }}"
-                                    href="{{ route('admin.apartments.index') }}">Apartments</a>
+                                    href="{{ route('admin.apartments.index') }}">Appartamenti</a>
                             </li>
                             <li class="nav-item nav-pills">
                                 <a class="nav-link {{ Route::currentRouteName() === 'admin.messages.index' ? 'active' : '' }}"
                                     href="{{ route('admin.messages.index') }}">MailBnB</a>
                             </li>
-                            <li class="nav-item nav-pills">
+                            {{-- <li class="nav-item nav-pills">
                                 <a class="nav-link" href="#">Sponsor</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </aside>
                 </div>

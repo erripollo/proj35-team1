@@ -8,7 +8,7 @@
         @if (session('success_message'))
             <div class="alert alert-success">
                 {{ session('success_message') }}
-                <a href="{{ route('admin.dashboard', compact('apartment')) }}">Torna alla dashboard</a>
+                <a href="{{ route('admin.apartments.index', compact('apartment')) }}">Torna ai tuoi appartamenti</a>
             </div>
         @endif
         @if (count($errors) > 0)
@@ -25,7 +25,7 @@
                 <div class="card-group">
 
                     @foreach ($sponsors as $sponsor)
-                        <div class="card border m-5 text-center shadow-sm">
+                        <div class="card border m-2 text-center">
                             <label class="card-body text-center" for="{{ $sponsor->name }}">
                                 <h3 class="sponsor-name card-title text-center">{{ $sponsor->name }} </h3>
                                 <p class="card-text">durata: {{ $sponsor->period }} ore</p>
@@ -44,7 +44,7 @@
                     </div>
                 </section>
                 <input id="nonce" name="payment_method_nonce" type="hidden" />
-                <button class="custom-button" type="submit"><span>Procedi al pagamento</span></button>
+                <button class="custom-button" type="submit"><span>Completa pagamento</span></button>
             </div>
         @endif
     </form>

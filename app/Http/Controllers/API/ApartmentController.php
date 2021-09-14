@@ -15,7 +15,7 @@ class ApartmentController extends Controller
     {
         $homeCitySearch = $request->location;
 
-        $apartments = ApartmentResource::collection(Apartment::with(['services', 'sponsors'])->doesntHave('sponsors')
+        return ApartmentResource::collection(Apartment::with(['services', 'sponsors'])->doesntHave('sponsors')
             ->where('visible', true)
             ->get());
 
@@ -35,6 +35,7 @@ class ApartmentController extends Controller
         //->whereIn('service_id', [1, 3])
         // ->get());
         //return response()->json($apartmentTest);
+        //return response()->json($apartments);
 
         return view('guest.house', compact('apartments', 'homeCitySearch'));
     }

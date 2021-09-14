@@ -49943,7 +49943,8 @@ var app = new Vue({
     range: "20",
     lat1: 0,
     lon1: 0,
-    filtered: []
+    filtered: [],
+    apartmentId: ""
   },
   methods: {
     persist: function persist() {
@@ -50171,6 +50172,27 @@ var app = new Vue({
       } else {
         console.log("no");
       }
+    },
+    changeEditAddress: function changeEditAddress() {
+      var _this4 = this;
+
+      var url = window.location.href;
+      var params = url.split("/");
+      var id = parseInt(params[params.length - 2]);
+      this.apartmentId = id;
+      console.log(id, "log funzione prova edit");
+      $appartamento = {};
+      axios.get("/api/apartments/one?id=".concat(this.apartmentId)).then(function (data) {
+        //console.log(data, "log risposta");
+        appartamento = data.data.data; //console.log(appartamento, "log appartamento");
+
+        appartamento.forEach(function (element) {
+          //console.log(element.address, "log indirizzo");
+          _this4.location = element.address;
+        });
+      })["catch"](function (error) {
+        return console.log(error);
+      });
     }
     /* searchApart(){
              axios.get(this.url + this.searchCity + this.key).then(resp => {
@@ -50199,13 +50221,13 @@ var app = new Vue({
 
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
     axios.get("/api/apartments").then(function (resp) {
       console.log(resp, "PRIMA API CALL");
-      _this4.apartments = resp.data.data;
+      _this5.apartments = resp.data.data;
 
-      _this4.apartments.forEach(function (apartment) {
+      _this5.apartments.forEach(function (apartment) {
         //apartment.servizi = 'ciao';
         //console.log(apartment, 'ema console');
         apartment.servizi = [];
@@ -50219,7 +50241,7 @@ var app = new Vue({
     });
     axios.get("/api/services").then(function (resp) {
       console.log(resp, "CALL SERVICES");
-      _this4.services = resp.data.data;
+      _this5.services = resp.data.data;
     })["catch"](function (e) {
       console.error("Sorry! " + e);
     });
@@ -50240,17 +50262,9 @@ var app = new Vue({
         localStorage.removeItem("filteredApartments");
       }
     }
-    /* if (
-        window.location.href ==
-        "http://127.0.0.1:8000/admin/apartments/create"
-    ) {
-        console.log(window.location.href);
-    } else {
-        console.log("no");
-    } */
-
 
     this.resetStorage();
+    this.changeEditAddress();
   }
 });
 

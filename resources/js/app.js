@@ -59,7 +59,8 @@ const app = new Vue({
         range: "20",
         lat1: 0,
         lon1: 0,
-        filtered: []
+        filtered: [],
+        apartmentId: ""
     },
     methods: {
         persist() {
@@ -371,6 +372,29 @@ const app = new Vue({
             } else {
                 console.log("no");
             }
+        },
+
+        changeEditAddress() {
+            const url = window.location.href;
+            const params = url.split("/");
+            const id = parseInt(params[params.length - 2]);
+            this.apartmentId = id;
+            console.log(id, "log funzione prova edit");
+
+            $appartamento = {};
+
+            axios
+                .get(`/api/apartments/one?id=${this.apartmentId}`)
+                .then(data => {
+                    //console.log(data, "log risposta");
+                    appartamento = data.data.data;
+                    //console.log(appartamento, "log appartamento");
+                    appartamento.forEach(element => {
+                        //console.log(element.address, "log indirizzo");
+                        this.location = element.address;
+                    });
+                })
+                .catch(error => console.log(error));
         }
 
         /* searchApart(){
@@ -453,5 +477,6 @@ const app = new Vue({
         }
 
         this.resetStorage();
+        this.changeEditAddress();
     }
 });

@@ -37,10 +37,10 @@
     {{-- section sponsorapart --}}
     <section class="sponsored_section">
         <div class="sponsored_apartment py-5 d-flex flex-wrap">
-            <h3 class="col-12 offset-1 p-0">Appartamenti in evidenza</h3>
+            <h3 class="col-11 offset-1 p-0">Appartamenti in evidenza</h3>
             {{-- Qui ci va il foreach --}}
             <div class="container_cards d-flex justify-content-around flex-wrap">
-                <div class="card_apartment d-flex flex-column align-self-center justify-content-center">
+                <div class="card_apartment d-flex flex-column align-self-center justify-content-center my-4">
                     <div class="image_apartment">
                         <img class='image_apart mb-2' src="../img/Casa1.jpeg" alt="">
                     </div>
@@ -64,7 +64,7 @@
                         <a href="#" class="bottone_visualizza">Vedi aloggio</a>
                     </div>
                 </div>
-                <div class="card_apartment d-flex flex-column align-self-center justify-content-center">
+                <div class="card_apartment d-flex flex-column align-self-center justify-content-center my-4">
                     <div class="image_apartment">
                         <img class='image_apart mb-2' src="../img/Casa1.jpeg" alt="">
                     </div>
@@ -88,7 +88,7 @@
                         <a href="#" class="bottone_visualizza">Vedi aloggio</a>
                     </div>
                 </div>
-                <div class="card_apartment d-flex flex-column align-self-center justify-content-center">
+                <div class="card_apartment d-flex flex-column align-self-center justify-content-center my-4">
                     <div class="image_apartment">
                         <img class='image_apart mb-2' src="../img/Casa1.jpeg" alt="">
                     </div>
@@ -112,7 +112,7 @@
                         <a href="#" class="bottone_visualizza">Vedi aloggio</a>
                     </div>
                 </div>
-                <div class="card_apartment d-flex flex-column align-self-center justify-content-center">
+                <div class="card_apartment d-flex flex-column align-self-center justify-content-center my-4">
                     <div class="image_apartment">
                         <img class='image_apart mb-2' src="../img/Casa1.jpeg" alt="">
                     </div>

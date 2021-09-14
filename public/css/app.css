@@ -10002,6 +10002,62 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.footer_container {
+  background: linear-gradient(180deg, #00c4ff 0%, #090979 100%);
+  color: white;
+}
+.footer_container .footer_top_section {
+  padding: 1.5rem 0;
+}
+.footer_container .footer_top_section h4 {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+.footer_container .footer_top_section ul {
+  list-style: none;
+  color: white;
+}
+.footer_container .footer_top_section ul li {
+  line-height: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.footer_container .footer_top_section ul li a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+.footer_container .footer_bottom_section {
+  margin-bottom: 0;
+}
+.footer_container .footer_bottom_section .socials ul {
+  -webkit-padding-start: 0;
+          padding-inline-start: 0;
+}
+.footer_container .footer_bottom_section ul {
+  list-style: none;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+.footer_container .footer_bottom_section ul li {
+  margin: 0 10px;
+}
+.footer_container .footer_bottom_section ul li a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  .footer_bottom_section .policy ul {
+    -webkit-padding-start: 0;
+            padding-inline-start: 0;
+    font-size: 15px;
+  }
+  .footer_bottom_section .socials {
+    font-size: 15px;
+  }
+}
 .search_section {
   background-image: url("../../img/jumbo.jpeg");
   background-size: cover;
@@ -10030,8 +10086,17 @@ h3 {
   text-transform: uppercase;
   margin-bottom: 1.5rem;
 }
+.sponsored_section .sponsored_apartment h3::before {
+  content: "";
+  background-color: #30baec;
+  height: 50px;
+  width: 5px;
+  position: absolute;
+  transform: translate(-10px, 0px);
+}
 .sponsored_section .sponsored_apartment .container_cards {
-  width: 100%;
+  width: 85%;
+  margin: auto;
 }
 .sponsored_section .card_apartment {
   width: 350px;
@@ -10042,6 +10107,7 @@ h3 {
 }
 .sponsored_section .card_apartment .image_apart {
   width: 100%;
+  margin: auto;
   height: auto;
   border-radius: 20px 20px 0 0;
   border-bottom: 1px solid black;

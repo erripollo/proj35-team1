@@ -35,8 +35,19 @@
             margin-bottom:1.5rem;
             
         }
+        h3::before{
+           
+            content: "";
+            background-color: #30baec;
+            height: 50px;
+            width: 5px;
+            position: absolute;
+            transform: translate(-10px, 0px);
+              
+        }
         .container_cards{
-            width:100%
+            width: 85%;
+            margin: auto;
         }
     }
     
@@ -49,6 +60,7 @@
 
             .image_apart {
                 width: 100%;
+                margin: auto;
                 height: auto;
                 border-radius: 20px 20px 0 0;
                 border-bottom: 1px solid black;

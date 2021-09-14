@@ -10942,8 +10942,180 @@ a.text-dark:focus {
   }
 }
 
-#map {
-  height: 50vh;
-  width: 50vw;
+.topdiv {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.topdiv .hometitle {
+  font-size: 70px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #36A3D1;
+  filter: drop-shadow(2px 4px 6px);
+  padding-bottom: 30px;
+}
+
+.topdiv .homeaddress {
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  color: #36A3D1;
+  filter: drop-shadow(2px 4px 6px);
+}
+
+.imgdiv {
+  width: 100%;
+}
+
+.imgdiv img {
+  width: 100%;
+  height: 400px;
+}
+
+.homedesc {
+  justify-content: flex-start;
+  margin-top: 50px;
+  padding-left: 20px;
+  padding-right: 30px;
+  border-left: 1px solid lightgray;
+}
+
+.homedesc h4 {
+  padding-left: 15px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #36A3D1;
+  filter: drop-shadow(2px 4px 6px);
+}
+
+.homedesc p {
+  padding-left: 15px;
+  padding-top: 30px;
+  font-size: 15px;
+  word-spacing: 5px;
+  line-height: 30px;
+}
+
+.homeservice {
+  justify-content: flex-start;
+  margin-top: 50px;
+  padding-left: 20px;
+  border-left: 1px solid lightgray;
+  margin-right: 30px;
+}
+
+.homeservice h4 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  padding-left: 35px;
+  padding-bottom: 30px;
+  color: #36A3D1;
+  filter: drop-shadow(2px 4px 6px);
+}
+
+.divservice {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.divservice ul {
+  padding-bottom: 10px;
+}
+
+.divservice ul li {
+  list-style: none;
+  font-size: 17px;
+  word-spacing: 5px;
+  width: 200px;
+  vertical-align: middle;
+}
+
+.divservice ul li i {
+  filter: drop-shadow(2px 4px 6px);
+  font-size: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.divmap {
+  padding-top: 30px;
+  padding-left: 40px;
+}
+
+.divmap #map {
+  height: 45vh;
+  width: 33vw;
+}
+
+.divmap .divbutton {
+  margin-bottom: 30px;
+}
+
+.divmap .divbutton .buttonmap {
+  display: inline-block;
+  padding: 7px 25px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  outline: none;
+  color: white;
+  background: linear-gradient(90deg, #090979 0%, #00c4ff 100%);
+  border: #5689e9;
+  border-radius: 10px;
+}
+
+.divmap .divbutton .buttonmap i {
+  padding-left: 5px;
+}
+
+.divmessage {
+  margin-top: 100px;
+  padding: 50px;
+  border: 0.5px solid lightgray;
+  box-shadow: 1px 2px gray;
+}
+
+.divmessage h2 {
+  font-size: 23px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #36A3D1;
+  filter: drop-shadow(2px 4px 6px);
+}
+
+.divmessage label {
+  font-size: 15px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  filter: drop-shadow(2px 4px 8px);
+}
+
+.formbutton {
+  vertical-align: middle;
+  margin-top: 10px;
+  font-size: 15px;
+  padding: 5px 15px;
+  color: white;
+  background: linear-gradient(90deg, #090979 0%, #00c4ff 100%);
+  border: #5689e9;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.formbutton i {
+  margin-top: 3px;
+  padding-left: 5px;
+  font-size: 15px;
 }
 

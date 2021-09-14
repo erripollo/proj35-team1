@@ -13,6 +13,8 @@ class ServiceSeeder extends Seeder
     public function run()
     {
         $services = ['WIFI', 'Cucina','Piscina', 'Sauna', 'Aria Condizionata', 'Asciugatrice', 'Riscaldamento', 'Lavatrice', 'TV', 'Asciugacapelli', 'Parcheggio', 'Animali domestici ammessi', 'È vietato fumare', 'Giardino', 'Terrazza', 'Colazione', 'Camino','Accesso diretto alle piste da sci', 'Vista mare'];
+
+
         foreach($services as $service){
             $serv = new Service();
             $serv->name = $service;

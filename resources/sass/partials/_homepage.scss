@@ -1,0 +1,106 @@
+// Search section
+.search_section {
+    background-image: url("../../img/jumbo.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 69px);
+
+    h1 {
+        font-style: italic;
+    }
+
+    .input_searchbar {
+        
+        border-radius: 25px;
+    }
+    .button_search {
+        border-radius: 25px;
+        background-color: goldenrod;
+        border-color: goldenrod;
+        color: black;
+        font-weight: 700;
+    }
+}
+
+// Sponsored section
+.sponsored_section {
+    background-color: whitesmoke;
+    
+
+    .sponsored_apartment{
+        
+        h3{
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin-bottom:1.5rem;
+            
+        }
+        .container_cards{
+            width:100%
+        }
+    }
+    
+        .card_apartment {
+            width:350px;
+            color: #36a3d1;
+            border-radius: 20px;
+            box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 45%);
+            background-color: white;
+
+            .image_apart {
+                width: 100%;
+                height: auto;
+                border-radius: 20px 20px 0 0;
+                border-bottom: 1px solid black;
+            }
+            .titolo {
+                text-align: center;
+                border-bottom: 1px solid black;
+            }
+            .descrizione_apartment {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 7;
+                -webkit-box-orient: vertical;
+                text-align: justify;
+            }
+            .servizi_appartamento {
+                h5 {
+                    margin: 1rem 0;
+                }
+                ul{
+                    list-style: none;
+                    text-align: start;
+                    
+                    li{
+                        font-size: 15px;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+            .button_show_apartment {
+                margin: 1rem 0;
+                .bottone_visualizza {
+                    color: white;
+                    background: linear-gradient(
+                        90deg,
+                        rgba(9, 9, 121, 1) 0%,
+                        rgba(0, 196, 255, 1) 100%
+                    );
+                    border: rgb(86, 137, 233);
+                    border-radius: 10px;
+                    padding: 8px 12px;
+                    text-decoration: none;
+                }
+            }
+            .bottone_visualizza:hover {
+                color: rgb(0, 238, 255);
+                background-color: white !important;
+            }
+        }
+    
+}
+.card_apartment:hover {
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 75%);
+}

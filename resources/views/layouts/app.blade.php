@@ -92,14 +92,12 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
 
-   
-
+    @extends('layouts.footer') 
 
 </body>
-
 </html>

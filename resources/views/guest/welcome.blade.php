@@ -33,7 +33,6 @@
             {{-- <button v-on:click="persist" type="button" class="btn btn-primary">Primary</button> --}}
             <a v-on:click="persist" name="search" id="search" class="btn btn-primary" :class="(location) ? 'active' : 'disabled' " href="{{ route('house') }}" role="button">Search</a>
     </div>
-
     </form>
 </div>
 </div>

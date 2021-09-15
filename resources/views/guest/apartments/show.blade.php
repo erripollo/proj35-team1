@@ -14,8 +14,8 @@
             <h2 class="hometitle">{{ $apartment->title }}</h2>
             <h4 class="homeaddress">{{ $apartment->address }}</h4>
         </div>
-        <div class="imgdiv">
-            <img class="col-12" src="{{ asset('storage/' . $apartment->image) }}" alt="">
+        <div class="col-12 imgdiv">
+            <img class="img-fluid" src="{{ asset('storage/' . $apartment->image) }}" alt="">
         </div>
         <div class="d-flex flex-row mt-5">
             <div class="d-flex flex-column col-6 homedesc">
@@ -36,7 +36,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="divmessage d-flex flex-column col-6">
+                <div class="divmessage d-flex flex-column col-6 mb-5">
                     <h2 class="mt-3 ">Contatta il propretario</h2>
                     <form action="{{ route('send.message', $apartment->id) }}" method="post">
                         @csrf
@@ -80,10 +80,10 @@
     </div>
     </div>
 
-    <div class="container">
+    {{-- <div class="container">
         <button v-on:click="showMap({{ $apartment->latitude }}, {{ $apartment->longitude }})">Show Map</button>
         <div id="map" class="map mt-3"></div>
-    </div>
+    </div> --}}
     </div>
 
 @endsection

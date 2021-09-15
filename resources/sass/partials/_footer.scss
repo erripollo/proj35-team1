@@ -1,7 +1,4 @@
 .footer_container {
-
-    margin-top: 5rem;;
-
     background: linear-gradient(
         180deg,
         rgba(0, 196, 255, 1) 0%,
@@ -32,9 +29,8 @@
     .footer_bottom_section {
         margin-bottom: 0;
 
-
-        .socials{
-            ul{
+        .socials {
+            ul {
                 padding-inline-start: 0;
             }
         }
@@ -54,24 +50,17 @@
     }
 }
 
-
 @media (min-width: 992px) {
-
-      .footer_bottom_section{
-        
-        .policy{
-            
-            ul{
+    .footer_bottom_section {
+        .policy {
+            ul {
                 padding-inline-start: 0;
-                
+
                 font-size: 15px;
             }
         }
-        .socials{
+        .socials {
             font-size: 15px;
         }
-      }  
-
-
-
+    }
 }

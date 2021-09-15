@@ -12,8 +12,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script  src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/maps/maps-web.min.js"></script> 
-    <script  src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/services/services-web.min.js"></script> 
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/maps/maps-web.min.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/services/services-web.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,13 +27,14 @@
 
 
     <!-- Styles -->
-    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/maps/maps.css'/> 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">  
+    <link rel='stylesheet' type='text/css'
+        href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/maps/maps.css' />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-    
-    
-    
+
+
+
 </head>
 
 <body>
@@ -42,7 +43,7 @@
             <div class="container">
                 <a class="navbar-brand" style="font-size: 1.3rem" href="{{ url('/') }}">
                     <div class="d-flex align-items-end">
-                        <img src="img/logo.jpg" class="img-fluid" width="18%" alt=""> 
+                        <img src="img/logo.jpg" class="img-fluid" width="18%" alt="">
 
                     </div>
                 </a>
@@ -81,7 +82,7 @@
                                     <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Admin</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                         document.getElementById('logout-form').submit();">
+                                                                                                                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -97,12 +98,13 @@
             </div>
         </nav>
 
-        <main>
+        <main style="min-height: 550px">
             @yield('content')
         </main>
     </div>
 
-    @extends('layouts.footer') 
+    @extends('layouts.footer')
 
 </body>
+
 </html>

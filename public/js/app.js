@@ -49911,7 +49911,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component("example-component", __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49919,31 +49919,32 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app',
+  el: "#app",
   data: {
     apartments: null,
     services: null,
     serviceSelected: [],
-    url: 'https://api.tomtom.com/search/2/search/',
-    key: '.json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA&typeahead=true',
+    url: "https://api.tomtom.com/search/2/search/",
+    key: ".json?key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA&typeahead=true",
     key2: ".json?limit=5&countrySet=it&key=WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
-    searchCity: '',
+    searchCity: "",
     location: null,
     autocomplete: [],
     luogoObj: {},
-    latitudine: '',
-    longitudine: '',
-    latApartment: '',
-    lonApartment: '',
+    latitudine: "",
+    longitudine: "",
+    latApartment: "",
+    lonApartment: "",
     showControl: true,
     filteredApartments: [],
     temp: [],
-    rooms: '',
-    searchBeds: '',
-    range: '20',
+    rooms: "",
+    searchBeds: "",
+    range: "20",
     lat1: 0,
     lon1: 0,
-    filtered: []
+    filtered: [],
+    apartmentId: ""
   },
   methods: {
     persist: function persist() {
@@ -49951,7 +49952,7 @@ var app = new Vue({
       localStorage.latitudine = this.latitudine;
       localStorage.longitudine = this.longitudine;
       var parsed = JSON.stringify(this.filteredApartments);
-      localStorage.setItem('filteredApartments', parsed);
+      localStorage.setItem("filteredApartments", parsed);
     },
     autocompleteAddress: function autocompleteAddress() {
       var _this = this;
@@ -49960,7 +49961,7 @@ var app = new Vue({
         console.log(resp, "CALL TOMTOM");
         _this.autocomplete = resp.data.results;
         /*  this.lat1 = resp.data.results[0].position.lat;
-        this.lon1 = resp.data.results[0].position.lon; */
+             this.lon1 = resp.data.results[0].position.lon; */
       })["catch"](function (e) {
         console.error("Sorry! " + e);
       });
@@ -49971,17 +49972,17 @@ var app = new Vue({
       this.luogoObj = item; //this.location = "";
 
       if (item.address.streetNumber && item.address.countrySubdivision && item.address.streetName && item.address.streetNumber) {
-        this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
+        this.location = item.address.municipality + ", " + item.address.countrySubdivision + ", " + item.address.streetName + " " + item.address.streetNumber;
       } else {
-        alert('Inserire indirrizzo corretto (City, Street, Street number)');
-        this.location = '';
+        alert("Inserire indirrizzo corretto (City, Street, Street number)");
+        this.location = "";
       } //this.location = item.address.municipality + ', ' + item.address.countrySubdivision + ', ' + item.address.streetName + ' ' + item.address.streetNumber;
 
 
       this.latitudine = item.position.lat;
       this.longitudine = item.position.lon;
       this.showControl = false;
-      localStorage.location = '';
+      localStorage.location = "";
     },
     searchHomePage: function searchHomePage(item) {
       console.log(item.address.municipality);
@@ -49991,28 +49992,28 @@ var app = new Vue({
       this.longitudine = item.position.lon;
       this.filteredApartments = [];
       /* if (item.address.municipality == this.location) {
-          
-          document.getElementById("search").classList.add('active');
-          document.getElementById("search").classList.remove('disabled');
-      } */
+               
+               document.getElementById("search").classList.add('active');
+               document.getElementById("search").classList.remove('disabled');
+           } */
 
       /*  axios.get('/api/apartments').then(resp => {
-           console.log(resp, 'API APARTMENTS');
-           this.apartments = resp.data.data;
-       }).catch(e => {
-           console.error('Sorry! ' + e);
-       })  */
+               console.log(resp, 'API APARTMENTS');
+               this.apartments = resp.data.data;
+           }).catch(e => {
+               console.error('Sorry! ' + e);
+           })  */
       //PROVA CALCOLO DISTANZA
 
       /* console.log(this.apartments, 'Log tutti apartment');
-      var lat1 = 45.1168763;
-      var lon1 = 7.39455;
-            var lat2 = 45.07022;
-      var lon2 = 7.6842;
-            distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
-            console.log(distance, 'log prova distanza');
-      console.log(this.latitudine, this.longitudine);
-      console.log(this.apartments[0].latitude, this.apartments[0].longitude); */
+           var lat1 = 45.1168763;
+           var lon1 = 7.39455;
+                 var lat2 = 45.07022;
+           var lon2 = 7.6842;
+                 distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+                 console.log(distance, 'log prova distanza');
+           console.log(this.latitudine, this.longitudine);
+           console.log(this.apartments[0].latitude, this.apartments[0].longitude); */
 
       function clacDistance(lat1, lon1, lat2, lon2) {
         var distance = 6371 * 3.1415926 * Math.sqrt((lat2 - lat1) * (lat2 - lat1) + Math.cos(lat2 / 57.29578) * Math.cos(lat1 / 57.29578) * (lon2 - lon1) * (lon2 - lon1)) / 180;
@@ -50026,7 +50027,7 @@ var app = new Vue({
         var lat = parseFloat(el.latitude);
         var lon = parseFloat(el.longitude);
         var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
-        console.log(distance, 'Distanza appartamento');
+        console.log(distance, "Distanza appartamento");
 
         if (distance <= this.range) {
           this.filteredApartments.push(el);
@@ -50035,11 +50036,11 @@ var app = new Vue({
       }
 
       this.showControl = false;
-      localStorage.location = '';
+      localStorage.location = "";
     },
     saveApartment: function saveApartment() {
       var parsed = JSON.stringify(this.filteredApartments);
-      localStorage.setItem('filteredApartments', parsed);
+      localStorage.setItem("filteredApartments", parsed);
     },
     newRange: function newRange() {
       var _this2 = this;
@@ -50059,7 +50060,7 @@ var app = new Vue({
         var lat = parseFloat(el.latitude);
         var lon = parseFloat(el.longitude);
         var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
-        console.log(distance, 'Distanza appartamento');
+        console.log(distance, "Distanza appartamento");
 
         if (distance <= this.range) {
           this.filteredApartments.push(el);
@@ -50094,7 +50095,7 @@ var app = new Vue({
         var lat = parseFloat(el.latitude);
         var lon = parseFloat(el.longitude);
         var distance = clacDistance(this.latitudine, this.longitudine, lat, lon);
-        console.log(distance, 'Distanza appartamento');
+        console.log(distance, "Distanza appartamento");
 
         if (distance <= this.range) {
           this.filteredApartments.push(el);
@@ -50102,33 +50103,34 @@ var app = new Vue({
         }
       }
       /* var serviziTemp =[];
-       this.filteredApartments.forEach(apartment => {
-          this.serviceSelected.forEach(servizio => {
-              if (apartment.servizi.includes(servizio)) {
-                  console.log(servizio, 'servizio ci sta');
-                  serviziTemp.push(servizio)
+           this.filteredApartments.forEach(apartment => {
+              this.serviceSelected.forEach(servizio => {
+                  if (apartment.servizi.includes(servizio)) {
+                      console.log(servizio, 'servizio ci sta');
+                      serviziTemp.push(servizio)
+                  }
+              });
+               if(apartment.servizi.sort().join(',').includes(serviziTemp.sort().join(','))){
+                  alert('same members');
               }
+              else alert('not a match');
           });
-           if(apartment.servizi.sort().join(',').includes(serviziTemp.sort().join(','))){
-              alert('same members');
-          }
-          else alert('not a match');
-      });
-       if (apartment.servizi.every()) {
-          
-      } */
+           if (apartment.servizi.every()) {
+              
+          } */
 
       /*  this.filteredApartments.forEach(apartment => {
-           if (apartment.servizi.includes(this.serviceSelected)) {
-               temp.push(apartment)
-           }else if(temp.includes(apartment)) {
-               temp.splice(apartment, 1)
-           }
-       })
-                    console.log(temp); */
+                  if (apartment.servizi.includes(this.serviceSelected)) {
+                      temp.push(apartment)
+                  }else if(temp.includes(apartment)) {
+                      temp.splice(apartment, 1)
+                  }
+              })
+          
+          console.log(temp); */
 
 
-      console.log(this.temp, 'log prima ciclo');
+      console.log(this.temp, "log prima ciclo");
       this.filteredApartments.forEach(function (apartment) {
         if (_this3.serviceSelected.every(function (x) {
           return apartment.servizi.includes(x);
@@ -50138,79 +50140,110 @@ var app = new Vue({
       });
       this.filteredApartments = this.temp;
       /*  console.log(this.temp, 'log post ciclo');
-       if (this.temp.length <= 0) {
-           this.temp.push(
-               {
-                   title: 'Nessun risultato'
-               }
-           )
-       } */
+          if (this.temp.length <= 0) {
+              this.temp.push(
+                  {
+                      title: 'Nessun risultato'
+                  }
+              )
+          } */
     },
     showMap: function showMap(lat, _long) {
       coordinates = [_long, lat];
-      tt.setProductInfo('<test>', '<beta>');
+      tt.setProductInfo("<test>", "<beta>");
       var map = tt.map({
-        key: 'WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA',
-        container: 'map',
-        language: 'italian',
-        style: 'tomtom://vector/1/basic-main',
+        key: "WKV00hGlXHkJdGuro8v49W6Z2GpiQaqA",
+        container: "map",
+        language: "italian",
+        style: "tomtom://vector/1/basic-main",
         center: coordinates,
         zoom: 12
       });
       map.addControl(new tt.FullscreenControl());
       map.addControl(new tt.NavigationControl());
       var marker = new tt.Marker().setLngLat(coordinates).addTo(map);
+    },
+
+    /* Resetta il value di location nel create  */
+    resetStorage: function resetStorage() {
+      if (window.location.href === "http://127.0.0.1:8000/admin/apartments/create") {
+        //console.log("ok");
+        this.location = "";
+      } else {
+        console.log("no");
+      }
+    },
+    changeEditAddress: function changeEditAddress() {
+      var _this4 = this;
+
+      var url = window.location.href;
+      var params = url.split("/");
+      var id = parseInt(params[params.length - 2]);
+      this.apartmentId = id;
+      console.log(id, "log funzione prova edit");
+      $appartamento = {};
+      axios.get("/api/apartments/one?id=".concat(this.apartmentId)).then(function (data) {
+        //console.log(data, "log risposta");
+        appartamento = data.data.data; //console.log(appartamento, "log appartamento");
+
+        appartamento.forEach(function (element) {
+          //console.log(element.address, "log indirizzo");
+          _this4.location = element.address;
+        });
+      })["catch"](function (error) {
+        return console.log(error);
+      });
     }
     /* searchApart(){
-        axios.get(this.url + this.searchCity + this.key).then(resp => {
-            console.log(resp, 'CALL TOMTOM');
-            this.lat1 = resp.data.results[0].position.lat;
-            this.lon1 = resp.data.results[0].position.lon;
-        }).catch(e => {
-            console.error('Sorry! ' + e);
-        })
-              function calcDistance(lat2, lon2) {
-            
-            var distance;
-                  distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
-            console.log(distance);
-            return distance
-        }
-              this.apartments.forEach(apartment => {
-            calcDistance(apartment.lat, apartment.lon)
-            if (distance <= this.range) {
-                this.filtered.push(apartment)
-            }
-        });
-              
-        
-    } */
+             axios.get(this.url + this.searchCity + this.key).then(resp => {
+                 console.log(resp, 'CALL TOMTOM');
+                 this.lat1 = resp.data.results[0].position.lat;
+                 this.lon1 = resp.data.results[0].position.lon;
+             }).catch(e => {
+                 console.error('Sorry! ' + e);
+             })
+                   function calcDistance(lat2, lon2) {
+                 
+                 var distance;
+                       distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
+                 console.log(distance);
+                 return distance
+             }
+                   this.apartments.forEach(apartment => {
+                 calcDistance(apartment.lat, apartment.lon)
+                 if (distance <= this.range) {
+                     this.filtered.push(apartment)
+                 }
+             });
+                   
+             
+         } */
 
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
-    axios.get('/api/apartments').then(function (resp) {
-      console.log(resp, 'PRIMA API CALL');
-      _this4.apartments = resp.data.data;
+    axios.get("/api/apartments").then(function (resp) {
+      console.log(resp, "PRIMA API CALL");
+      _this5.apartments = resp.data.data;
 
-      _this4.apartments.forEach(function (apartment) {
+      _this5.apartments.forEach(function (apartment) {
         //apartment.servizi = 'ciao';
         //console.log(apartment, 'ema console');
         apartment.servizi = [];
         apartment.services.forEach(function (serviceName) {
           apartment.servizi.push(serviceName.name);
         });
-        console.log(apartment, 'log servizi array');
+        console.log(apartment, "log servizi array");
       });
     })["catch"](function (e) {
-      console.error('Sorry! ' + e);
+      console.error("Sorry! " + e);
     });
-    axios.get('/api/services').then(function (resp) {
-      console.log(resp, 'CALL SERVICES');
-      _this4.services = resp.data.data;
+    axios.get("/api/services").then(function (resp) {
+      console.log(resp, "CALL SERVICES");
+      _this5.services = resp.data.data;
     })["catch"](function (e) {
-      console.error('Sorry! ' + e);
+      console.error("Sorry! " + e);
     });
     /* Storage di location e coordinate */
 
@@ -50222,13 +50255,16 @@ var app = new Vue({
     /* Storage filtered appartamnent */
 
 
-    if (localStorage.getItem('filteredApartments')) {
+    if (localStorage.getItem("filteredApartments")) {
       try {
-        this.filteredApartments = JSON.parse(localStorage.getItem('filteredApartments'));
+        this.filteredApartments = JSON.parse(localStorage.getItem("filteredApartments"));
       } catch (e) {
-        localStorage.removeItem('filteredApartments');
+        localStorage.removeItem("filteredApartments");
       }
     }
+
+    this.resetStorage();
+    this.changeEditAddress();
   }
 });
 
@@ -50367,8 +50403,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/php/proj35-team1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/php/proj35-team1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Erri/Library/Mobile Documents/com~apple~CloudDocs/Programmazione/Boolean/Corso/proj35-team1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/Erri/Library/Mobile Documents/com~apple~CloudDocs/Programmazione/Boolean/Corso/proj35-team1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

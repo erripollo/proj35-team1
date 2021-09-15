@@ -35,15 +35,17 @@
             </div>
             <div class="col-6 d-flex justify-content-around align-items-center">
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Servizi
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Servizi
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="services">
                             <div class="form-check" v-for="service in services">
                                 <label class="form-check-label">
                                     <input v-on:change="checkFilter" v-on:check type="checkbox" class="form-check-input"
-                                        :name="service.name" :id="service.name" :value="service.name" v-model="serviceSelected">
+                                        :name="service.name" :id="service.name" :value="service.name"
+                                        v-model="serviceSelected">
                                     @{{ service . name }}
                                 </label>
                             </div>
@@ -51,33 +53,33 @@
                     </div>
                 </div>
                 <div class="dropdown">
-                    <button class="btn dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Stanze e letti
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Stanze e letti
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="numbers">
                             <div class="form-group">
-                                <input type="number"name="n_rooms" id="n_rooms" class="form-control" placeholder="Numero Stanze"
-                                    aria-describedby="n_roomsHelper" v-model="rooms" min="0">
+                                <input type="number" name="n_rooms" id="n_rooms" class="form-control"
+                                    placeholder="Numero Stanze" aria-describedby="n_roomsHelper" v-model="rooms" min="0">
                             </div>
                             <div class="form-group">
-                                <input type="number" name="n_beds" id="n_beds" class="form-control" placeholder="Numero Letti"
-                                    aria-describedby="n_bedsHelper" v-model="searchBeds" min="0">
+                                <input type="number" name="n_beds" id="n_beds" class="form-control"
+                                    placeholder="Numero Letti" aria-describedby="n_bedsHelper" v-model="searchBeds" min="0">
                             </div>
                         </div>
                     </div>
-                  </div>
+                </div>
 
             </div>
         </div>
 
         <div class="found">
-            <div class="card text-left m-2 shadow" v-for="apartment in filteredApartments"
+            <div class="card text-left m-5 shadow" v-for="apartment in filteredApartments"
                 v-if="apartment.n_rooms >= rooms && apartment.n_beds >= searchBeds">
                 <div class="row">
                     <div class="col-6">
-                        <img class="card-img-top" :src=" 'storage/' + apartment.image "
-                        :alt="apartment.title">
+                        <img class="card-img-top" :src=" 'storage/' + apartment.image " :alt="apartment.title">
                     </div>
                     <div class="col-6">
                         <div class="card-body">
@@ -89,7 +91,7 @@
                             <p><i class="fas fa-bed"></i> @{{ apartment . n_beds }}</p>
                             <p id="" class="card-text"><small class="m-2"
                                     v-for="service in apartment.services">@{{ service . name }} </small></p>
-    
+
                         </div>
                     </div>
                 </div>

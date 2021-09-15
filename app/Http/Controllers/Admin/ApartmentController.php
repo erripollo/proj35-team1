@@ -52,7 +52,7 @@ class ApartmentController extends Controller
             'address'=>'required | max:255 | min: 4',
             'latitude'=>'required',
             'longitude'=>'required',
-            'image'=>'nullable | image | max: 150',
+            'image'=>'nullable | image | max: 500',
             'description'=>'nullable | min: 10',
             'n_rooms'=>'required | integer | min: 1',
             'n_baths'=>'required | integer | min: 1',
@@ -104,8 +104,14 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         if (Auth::user()->id == $apartment->user_id){
+            $services = Service::all();
+        if (Auth::user()) {
+            $user = Auth::user()->email;
+        }else{
+            $user = '';
+        }
 
-            return view('admin.apartments.show', compact('apartment'));
+            return view('admin.apartments.show', compact('apartment', 'user', 'services'));
         }
         
     }

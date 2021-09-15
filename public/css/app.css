@@ -10003,7 +10003,6 @@ h3 {
   }
 }
 .footer_container {
-  margin-top: 5rem;
   background: linear-gradient(180deg, #00c4ff 0%, #090979 100%);
   color: white;
 }
@@ -10082,6 +10081,9 @@ h3 {
 .sponsored_section {
   background-color: whitesmoke;
 }
+.sponsored_section .sponsored_apartment {
+  padding-bottom: 5rem;
+}
 .sponsored_section .sponsored_apartment h3 {
   font-size: 1.8rem;
   text-transform: uppercase;
@@ -10120,7 +10122,9 @@ h3 {
 .sponsored_section .card_apartment .image_apartment .image_apart {
   width: 100%;
   margin: auto;
-  height: auto;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 20px 20px 0 0;
   border-bottom: 1px solid black;
 }
@@ -10132,9 +10136,12 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   text-align: justify;
+}
+.sponsored_section .card_apartment .servizi_appartamento {
+  height: 180px;
 }
 .sponsored_section .card_apartment .servizi_appartamento h5 {
   margin: 1rem 0;
@@ -10337,7 +10344,7 @@ h3 {
 }
 
 h3 {
-  color: #36A3D1;
+  color: #36a3d1;
   font-weight: bolder;
 }
 
@@ -10346,38 +10353,39 @@ h3 {
   text-align: center;
 }
 .selection .form-group {
-  color: #36A3D1;
+  color: #36a3d1;
 }
 .selection .form-group input {
   border-radius: 30px;
-  border-color: #C4DFE8;
+  border-color: #c4dfe8;
 }
 .selection .dropdown button {
   border-radius: 30px;
   color: white;
-  background-color: #36A3D1;
-  border-color: #C4DFE8;
+  background-color: #36a3d1;
+  border-color: #c4dfe8;
   padding-left: 50px;
   padding-right: 50px;
 }
 .selection .dropdown .dropdown-menu {
   padding: 15px;
-  border-radius: 57px;
-  border-color: #C4DFE8;
+  border-radius: 20px;
+  border-color: #c4dfe8;
+  transform: translate3d(-12px, 35px, 0px) !important;
 }
 .selection .dropdown .dropdown-menu .services {
   height: 90px;
   overflow: auto;
   padding: 10px;
-  color: #36A3D1;
+  color: #36a3d1;
 }
 .selection .dropdown .dropdown-menu .numbers {
   height: 90px;
-  color: #36A3D1;
+  color: #36a3d1;
 }
 .selection .dropdown .dropdown-menu .numbers input {
   border-style: none;
-  color: #36A3D1;
+  color: #36a3d1;
   padding: 5px;
 }
 
@@ -10385,7 +10393,7 @@ h3 {
   margin-top: 7rem;
 }
 .found .card {
-  border-color: #C4DFE8;
+  border-color: #c4dfe8;
   border-radius: 40px;
   height: 500px;
 }
@@ -10397,33 +10405,37 @@ h3 {
      object-fit: cover;
   height: 100%;
   border-radius: 30px;
-  filter: drop-shadow(2px 4px 6px #36A3D1);
+  filter: drop-shadow(2px 4px 6px #36a3d1);
 }
 .found .card .row .card-body .card-title {
-  color: #36A3D1;
-  margin-bottom: 2rem;
+  color: #36a3d1;
+  margin-bottom: 1rem;
   height: 40px;
   filter: drop-shadow(2px 4px 6px);
 }
 .found .card .row .card-body .card-text {
   color: #a7d8e9;
-  height: 50px;
-  overflow: scroll;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  text-align: justify;
 }
 .found .card .row .card-body #clear {
   color: #a7d8e9;
 }
 .found .card .row .card-body p {
-  color: #36A3D1;
+  color: #36a3d1;
 }
 .found .card a {
-  border-color: #C4DFE8;
-  color: #36A3D1;
+  border-color: #c4dfe8;
+  color: #36a3d1;
   border-radius: 30px;
 }
 .found .card a:hover {
   color: white;
-  background-color: #36A3D1;
+  background-color: #36a3d1;
 }
 
 .mail h1 {

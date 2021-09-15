@@ -17,12 +17,12 @@ use Illuminate\Support\Carbon;
 */
 
 Route::get('/', function () {
-    $now = Carbon::now()->setTimeZone("Europe/Rome");
+    //$now = Carbon::now()->setTimeZone("Europe/Rome");
     $sponsoredApartment = ApartmentResource::collection(Apartment::with(['services'])
         ->join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
-        ->where('end', '>', $now)
+       // ->where('end', '>', $now)
         ->where('visible', true)
-        ->paginate(10));
+        ->paginate(4));
     return view('guest.welcome', compact('sponsoredApartment'));
 });
 

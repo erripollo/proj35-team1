@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Apartment;
+use App\Http\Resources\ApartmentResource;
+use Illuminate\Support\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('guest.welcome');
+    $now = Carbon::now()->setTimeZone("Europe/Rome");
+    $sponsoredApartment = ApartmentResource::collection(Apartment::with(['services'])
+        ->join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+        ->where('end', '>', $now)
+        ->where('visible', true)
+        ->paginate(10));
+    return view('guest.welcome', compact('sponsoredApartment'));
 });
 
 /* view apartment and send messages */

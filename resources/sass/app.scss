@@ -7,6 +7,11 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import 'partials/house';
+@import'partials/message';
+@import'partials/message_show';
+@import'partials/sponsor';
+
 #map {
     height: 50vh;
     width: 50vw;

@@ -1,0 +1,128 @@
+
+h3{
+    color:#36A3D1;
+    font-weight: bolder;
+}
+
+
+.selection {
+    margin-top:3rem;
+    text-align: center;
+
+    .form-group{
+        color: #36A3D1;
+
+        input{
+            border-radius: 30px;
+            border-color:#C4DFE8;
+        }
+    }
+
+    .dropdown{
+        button {
+            border-radius: 30px;
+            color: white;
+            background-color:#36A3D1 ;
+            border-color:#C4DFE8;
+            padding-left: 50px;
+            padding-right: 50px;
+
+        }
+
+
+        .dropdown-menu{
+            padding: 15px;
+            border-radius: 57px;
+            border-color:#C4DFE8;
+
+            .services{
+                height: 90px;
+                overflow: auto;
+                padding:10px;
+                color:#36A3D1;
+            }
+
+            .numbers{
+                height: 90px;
+                color:#36A3D1;
+                
+
+                input{
+                    border-style: none;
+                    color:#36A3D1;
+                    padding:5px;
+                }
+
+            }
+        }
+
+
+
+    }
+}
+
+
+.found{
+    margin-top: 7rem;
+    .card {
+        border-color: #C4DFE8;
+        border-radius: 40px;
+        height: 500px;
+
+        .row{
+
+            padding:20px;
+
+            img{
+                object-fit: cover;
+                height: 100%;
+                border-radius: 30px;
+                filter: drop-shadow(2px 4px 6px #36A3D1);
+                
+            }
+        
+            .card-body {
+
+                .card-title{
+                    color:#36A3D1;
+                    margin-bottom: 2rem;
+                    height: 40px;
+                    filter: drop-shadow(2px 4px 6px);
+                }
+    
+                .card-text{
+                    color: #a7d8e9;
+                    height: 50px;
+                    overflow: scroll;
+                }
+
+
+                #clear{
+                    color:#a7d8e9;
+                }
+
+                p{
+                    color:#36A3D1;
+
+                }
+            }
+
+        }
+
+        a {
+            border-color:#C4DFE8;
+            color:#36A3D1;
+            border-radius: 30px;
+        }
+
+        a:hover{
+            color:white;
+            background-color: #36A3D1;
+        }
+    
+    }
+
+}
+
+
+

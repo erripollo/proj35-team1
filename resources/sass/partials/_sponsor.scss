@@ -1,0 +1,28 @@
+.sponsors{
+
+    .card{
+        background-color:#52bfee;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        filter: saturate(0.5);
+        border-radius: 30px;
+
+        .card-body{
+            h3{
+                font-size: 20px;
+                font-weight: bold;
+                color:rgb(255, 255, 255);
+                font-style: oblique;
+            }
+
+            p{
+                font-size: 15px;
+                color: #244cff;
+                font-style: oblique;
+            }
+        }
+        
+    }
+
+}

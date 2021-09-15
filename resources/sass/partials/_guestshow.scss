@@ -38,7 +38,7 @@
     margin-top: 50px;
     padding-left: 20px;
     padding-right: 30px;
-    border-left: 1px solid lightgray;
+    border-left: 1px solid rgb(0, 238, 255);
 
     h4{
         padding-left: 15px;
@@ -62,7 +62,7 @@
     justify-content: flex-start;
     margin-top: 50px;
     padding-left: 20px;
-    border-left: 1px solid lightgray;
+    border-left: 1px solid rgb(0, 238, 255);
     margin-right: 30px;
 
     h4{
@@ -102,46 +102,10 @@
     }
 }
 
-
-.divmap{
-    padding-top: 30px;
-    padding-left: 40px;
-    
-    #map {
-        height: 45vh;
-        width: 33vw;
-    }
-
-    .divbutton{
-        margin-bottom: 30px;
-
-        .buttonmap {
-            display: inline-block;
-            padding: 7px 25px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: center;
-            vertical-align: middle;
-            text-decoration: none;
-            outline: none;
-            color: white;
-            background: linear-gradient(90deg, rgba(9,9,121,1) 0%, rgba(0,196,255,1) 100%);
-            border: rgb(86, 137, 233);
-            border-radius: 10px;
-        
-            i{
-                padding-left: 5px;
-            }
-        }
-    }
-}
-
 .divmessage{
     margin-top: 100px;
     padding: 50px;
     border: 0.5px solid lightgray;
-    box-shadow: 1px 2px gray;
 
     h2{
         font-size: 23px;
@@ -171,9 +135,51 @@
     border-radius: 10px;
     cursor: pointer;
 
+    &:hover{
+        color: rgb(0, 238, 255);
+    }
+
     i{
         margin-top: 3px;
         padding-left: 5px;
         font-size: 15px;
+    }
+}
+
+.divmap{
+    padding-top: 30px;
+    padding-left: 40px;
+    
+    #map {
+        height: 45vh;
+        width: 33vw;
+    }
+
+    .divbutton{
+        margin-bottom: 30px;
+
+        .buttonmap {
+            display: inline-block;
+            padding: 7px 25px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration: none;
+            outline: none;
+            color: white;
+            background: linear-gradient(90deg, rgba(9,9,121,1) 0%, rgba(0,196,255,1) 100%);
+            border: rgb(86, 137, 233);
+            border-radius: 10px;
+
+            &:hover{
+                color: rgb(0, 238, 255);
+            }
+        
+            i{
+                padding-left: 5px;
+            }
+        }
     }
 }

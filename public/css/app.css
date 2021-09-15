@@ -10982,7 +10982,7 @@ a.text-dark:focus {
   margin-top: 50px;
   padding-left: 20px;
   padding-right: 30px;
-  border-left: 1px solid lightgray;
+  border-left: 1px solid #00eeff;
 }
 
 .homedesc h4 {
@@ -11006,7 +11006,7 @@ a.text-dark:focus {
   justify-content: flex-start;
   margin-top: 50px;
   padding-left: 20px;
-  border-left: 1px solid lightgray;
+  border-left: 1px solid #00eeff;
   margin-right: 30px;
 }
 
@@ -11045,6 +11045,49 @@ a.text-dark:focus {
   padding-bottom: 10px;
 }
 
+.divmessage {
+  margin-top: 100px;
+  padding: 50px;
+  border: 0.5px solid lightgray;
+}
+
+.divmessage h2 {
+  font-size: 23px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #36A3D1;
+  filter: drop-shadow(2px 4px 6px);
+}
+
+.divmessage label {
+  font-size: 15px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  filter: drop-shadow(2px 4px 8px);
+}
+
+.formbutton {
+  vertical-align: middle;
+  margin-top: 10px;
+  font-size: 15px;
+  padding: 5px 15px;
+  color: white;
+  background: linear-gradient(90deg, #090979 0%, #00c4ff 100%);
+  border: #5689e9;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.formbutton:hover {
+  color: #00eeff;
+}
+
+.formbutton i {
+  margin-top: 3px;
+  padding-left: 5px;
+  font-size: 15px;
+}
+
 .divmap {
   padding-top: 30px;
   padding-left: 40px;
@@ -11075,47 +11118,11 @@ a.text-dark:focus {
   border-radius: 10px;
 }
 
+.divmap .divbutton .buttonmap:hover {
+  color: #00eeff;
+}
+
 .divmap .divbutton .buttonmap i {
   padding-left: 5px;
-}
-
-.divmessage {
-  margin-top: 100px;
-  padding: 50px;
-  border: 0.5px solid lightgray;
-  box-shadow: 1px 2px gray;
-}
-
-.divmessage h2 {
-  font-size: 23px;
-  font-weight: 700;
-  margin-bottom: 40px;
-  color: #36A3D1;
-  filter: drop-shadow(2px 4px 6px);
-}
-
-.divmessage label {
-  font-size: 15px;
-  margin-bottom: 15px;
-  margin-top: 10px;
-  filter: drop-shadow(2px 4px 8px);
-}
-
-.formbutton {
-  vertical-align: middle;
-  margin-top: 10px;
-  font-size: 15px;
-  padding: 5px 15px;
-  color: white;
-  background: linear-gradient(90deg, #090979 0%, #00c4ff 100%);
-  border: #5689e9;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.formbutton i {
-  margin-top: 3px;
-  padding-left: 5px;
-  font-size: 15px;
 }
 

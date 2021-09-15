@@ -63199,7 +63199,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/anastasiafrassini/Desktop/proj35-team1/resources/js/stats.js */"./resources/js/stats.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/php/proj35-team1/resources/js/stats.js */"./resources/js/stats.js");
 
 
 /***/ })

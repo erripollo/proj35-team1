@@ -29,6 +29,8 @@
     <!-- Styles -->
     <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/maps/maps.css'/> 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">  
+
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
     
     
     
@@ -38,8 +40,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" style="font-size: 1.3rem" href="{{ url('/') }}">
+                    <div class="d-flex align-items-end">
+                        <img src="img/logo.jpg" class="img-fluid" width="18%" alt=""> 
+
+                    </div>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -57,11 +62,11 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
+                            <li class="nav-item btn-sm btn-outline-warning" style="color:black; font-weight:500;">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
+                                <li class="nav-item btn-sm btn-outline-info" style="color:black; font-weight:500;">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif

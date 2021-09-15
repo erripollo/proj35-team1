@@ -4,7 +4,7 @@
 
     <div class="container">
 
-        <h3>Soggiorni nell'area indicata</h3>
+        <h3 class="mt-5">Soggiorni nell'area indicata</h3>
         <div class="row d-flex align-items-center selection">
             <div class="col-6 pr-5 d-flex justify-content-around align-items-center">
                 {{-- searchApart --}}

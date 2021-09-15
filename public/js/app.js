@@ -50007,10 +50007,10 @@ var app = new Vue({
       /* console.log(this.apartments, 'Log tutti apartment');
       var lat1 = 45.1168763;
       var lon1 = 7.39455;
-             var lat2 = 45.07022;
+            var lat2 = 45.07022;
       var lon2 = 7.6842;
-             distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
-             console.log(distance, 'log prova distanza');
+            distance = (6371*3.1415926*Math.sqrt((lat2-lat1)*(lat2-lat1) + Math.cos(lat2/57.29578)*Math.cos(lat1/57.29578)*(lon2-lon1)*(lon2-lon1))/180);
+            console.log(distance, 'log prova distanza');
       console.log(this.latitudine, this.longitudine);
       console.log(this.apartments[0].latitude, this.apartments[0].longitude); */
 
@@ -50102,19 +50102,19 @@ var app = new Vue({
         }
       }
       /* var serviziTemp =[];
-        this.filteredApartments.forEach(apartment => {
+       this.filteredApartments.forEach(apartment => {
           this.serviceSelected.forEach(servizio => {
               if (apartment.servizi.includes(servizio)) {
                   console.log(servizio, 'servizio ci sta');
                   serviziTemp.push(servizio)
               }
           });
-            if(apartment.servizi.sort().join(',').includes(serviziTemp.sort().join(','))){
+           if(apartment.servizi.sort().join(',').includes(serviziTemp.sort().join(','))){
               alert('same members');
           }
           else alert('not a match');
       });
-        if (apartment.servizi.every()) {
+       if (apartment.servizi.every()) {
           
       } */
 
@@ -50125,7 +50125,7 @@ var app = new Vue({
                temp.splice(apartment, 1)
            }
        })
-                     console.log(temp); */
+                    console.log(temp); */
 
 
       console.log(this.temp, 'log prima ciclo');
@@ -50169,20 +50169,20 @@ var app = new Vue({
         }).catch(e => {
             console.error('Sorry! ' + e);
         })
-               function calcDistance(lat2, lon2) {
+              function calcDistance(lat2, lon2) {
             
             var distance;
-                   distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
+                  distance = (6371*3.1415926*Math.sqrt((lat2-this.lat1)*(lat2-this.lat1) + Math.cos(lat2/57.29578)*Math.cos(this.lat1/57.29578)*(lon2-this.lon1)*(lon2-this.lon1))/180);
             console.log(distance);
             return distance
         }
-               this.apartments.forEach(apartment => {
+              this.apartments.forEach(apartment => {
             calcDistance(apartment.lat, apartment.lon)
             if (distance <= this.range) {
                 this.filtered.push(apartment)
             }
         });
-               
+              
         
     } */
 
@@ -50367,8 +50367,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/anastasiafrassini/Desktop/proj35-team1/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/anastasiafrassini/Desktop/proj35-team1/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/php/proj35-team1/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/php/proj35-team1/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

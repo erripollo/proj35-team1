@@ -5,20 +5,44 @@ use Illuminate\Database\Seeder;
 use App\Sponsor;
 
 class SponsorSeeder extends Seeder
-{
+{   
+
+    
+
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i = 0; $i < 3; $i++) {
-            $sponsor = new Sponsor();
-            $sponsor->name = $faker->name();
-            $sponsor->price = $faker->randomFloat(2, 1, 10);
-            $sponsor->period = $faker->numberBetween(24, 144);
-            $sponsor->save();
+        
+        $sponsors=[
+
+            [
+                'name' => 'Basic',
+                'price'	=> 2.99,
+                'period'=> 24
+            ],
+            [
+                'name' => 'Plus',
+                'price'	=> 5.99,
+                'period'=> 72
+            ],
+            [
+                'name' => 'Premium',
+                'price'	=> 9.99,
+                'period'=> 144
+            ],
+        ];      
+        
+        foreach ($sponsors as $sponsor) {
+            
+            $spons = new Sponsor();
+            $spons->name = $sponsor['name'];
+            $spons->price = $sponsor['price'];
+            $spons->period = $sponsor['period'];
+            $spons->save();
         }
     }
 }

@@ -12,12 +12,80 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        $services = ['WIFI', 'Cucina','Piscina', 'Sauna', 'Aria Condizionata', 'Asciugatrice', 'Riscaldamento', 'Lavatrice', 'TV', 'Asciugacapelli', 'Parcheggio', 'Animali domestici ammessi', 'È vietato fumare', 'Giardino', 'Terrazza', 'Colazione', 'Camino','Accesso diretto alle piste da sci', 'Vista mare'];
+
+        $services = [
+            [
+                'name' => 'WIFI',
+                'icon' => 'fas fa-wifi',
+            ],
+            [
+                'name' => 'Cucina',
+                'icon' => 'fas fa-utensils',
+            ],
+            [
+                'name' => 'Piscina',
+                'icon' => 'fas fa-swimmer',
+            ],
+            [
+                'name' => 'Sauna',
+                'icon' => 'fas fa-hot-tub',
+            ],
+            [
+                'name' => 'Aria condizionata',
+                'icon' => 'fas fa-snowflake',
+            ],
+            [
+                'name' => 'Riscaldamento',
+                'icon' => 'fas fa-temperature-high',
+            ],
+            [
+                'name' => 'Lavatrice',
+                'icon' => 'fas fa-tshirt',
+            ],
+            [
+                'name' => 'TV',
+                'icon' => 'fas fa-tv',
+            ],
+            [
+                'name' => 'Parchegio',
+                'icon' => 'fas fa-parking',
+            ],
+            [
+                'name' => 'Animali domestici ammessi',
+                'icon' => 'fas fa-paw',
+            ],
+            [
+                'name' => 'Area fumatori',
+                'icon' => 'fas fa-smoking',
+            ],
+            [
+                'name' => 'Giardino',
+                'icon' => 'fas fa-seedling',
+            ],
+            [
+                'name' => 'Colazione inclusa',
+                'icon' => 'fas fa-mug-hot',
+            ],
+            [
+                'name' => 'Camino',
+                'icon' => 'fas fa-fire',
+            ],
+            [
+                'name' => 'Vicino alle piste da sci',
+                'icon' => 'fas fa-skiing',
+            ],
+            [
+                'name' => 'Vista mare',
+                'icon' => 'fas fa-water',
+            ],
+                
+        ];
 
 
         foreach($services as $service){
             $serv = new Service();
-            $serv->name = $service;
+            $serv->name = $service['name'];
+            $serv->icon = $service['icon'];
             $serv->save();
         }
     }

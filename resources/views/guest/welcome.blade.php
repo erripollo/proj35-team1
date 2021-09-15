@@ -42,6 +42,7 @@
             <div class="container_cards d-flex justify-content-around flex-wrap">
                 <div class="card_apartment d-flex flex-column align-self-center justify-content-center my-4">
                     <div class="image_apartment">
+                        <i class="fas fa-star"></i>
                         <img class='image_apart mb-2' src="../img/Casa1.jpeg" alt="">
                     </div>
                     <div class="titolo col-12 mb-2">

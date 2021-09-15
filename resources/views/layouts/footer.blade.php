@@ -149,51 +149,14 @@
     </div>
 
     <div class="footer_bottom_section col-10 offset-1 d-flex flex-wrap ">
-        <!-- Lista Informazioni Sito -->
-        <div class="policy col-12 col-lg-5 d-flex justify-content-around">
-            <ul id="site-infos" class="footer-nav-links">
-                <li>
-                    <a href="#">
-                        © 2021 BoolB&B, Inc.
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        · Privacy
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        · Termini
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        · Mappa del sito
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        · Dettagli dell'azienda
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-
+  
         <!-- Lista Social Links -->
-        <div class="socials col-12 col-lg-6 d-flex justify-content-around align-items-end ">
+        <div class="socials col-12 d-flex justify-content-center align-items-center">
             <ul id="social-links" class="footer-nav-links d-flex">
                 <li>
                     <a href="#">
                         <i class="fas fa-globe"></i>
-                        <span>ITALIANO (IT)</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-euro-sign"></i>
-                        <span>EUR</span>
+                        <span>Made by : Team 1 #35</span>
                     </a>
                 </li>
                 <li>

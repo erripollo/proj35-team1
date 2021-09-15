@@ -10105,7 +10105,18 @@ h3 {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.45);
   background-color: white;
 }
-.sponsored_section .card_apartment .image_apart {
+.sponsored_section .card_apartment .image_apartment {
+  position: relative;
+}
+.sponsored_section .card_apartment .image_apartment i {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.3rem;
+  color: gold;
+  filter: drop-shadow(2px 4px 6px black);
+}
+.sponsored_section .card_apartment .image_apartment .image_apart {
   width: 100%;
   margin: auto;
   height: auto;
@@ -10120,7 +10131,7 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   text-align: justify;
 }
@@ -10148,7 +10159,6 @@ h3 {
 }
 .sponsored_section .card_apartment .bottone_visualizza:hover {
   color: #00eeff;
-  background-color: white !important;
 }
 
 .card_apartment:hover {

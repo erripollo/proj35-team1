@@ -1,0 +1,48 @@
+.message {
+    .card {
+        border-color: #C4DFE8;
+        border-radius: 40px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+
+        img{
+            padding:5px;
+            border-radius: 20px;
+            filter: drop-shadow(2px 4px 6px #36A3D1);
+        }
+
+        .card-body{
+
+                h2{
+                    color:#36A3D1;
+                    font-size:20px;
+                }
+
+                h4{
+                    color: #a7d8e9;
+                    font-size: 15px;
+                }
+
+                .text{
+                    display: flex;
+                    flex-direction: column-reverse;
+                    justify-content: center;
+                    color:#48879e;
+                }
+
+                h5{
+                    font-size: 15px;
+                    color:#a7d8e9;
+                }
+
+                p{
+                    font-size: 20px;
+                    color:#48879e;
+                }
+
+        }
+
+    }
+}

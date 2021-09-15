@@ -1,8 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+    <div class="container mail">
         <h1>MailBnB</h1>
+        <p>check who sent you a message</p>
         @if ($messages->isEmpty())
 
             <h2>Nothing to display</h2>
@@ -11,12 +12,12 @@
             <table class="table table-hover">
                 <thead class="thead-inverse">
                     <tr>
-                        <th>From</th>
-                        <th>Email</th>
-                        <th>Object</th>
-                        <th>Message</th>
-                        <th>Send at</th>
-                        <th>Action</th>
+                        <th>FROM</th>
+                        <th>EMAIL</th>
+                        <th>OBJECT</th>
+                        <th>MESSAGE</th>
+                        <th>SEND AT</th>
+                        <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,13 +29,13 @@
                             <td>{{ Str::limit($message->body, 150, '...') }}</td>
                             <td>{{ $message->created_at }}</td>
 
-                            <td class="text-center d-flex flex-column">
-                                <a href="{{ route('admin.messages.show', $message->id) }}" class="btn btn-primary mb-2">
+                            <td id="bot" class="text-center">
+                                <a href="{{ route('admin.messages.show', $message->id) }}" class="btn">
                                     <i class="fas fa-envelope-open-text"></i>
                                 </a>
 
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                <button type="button" class="btn" data-toggle="modal"
                                     data-target="#message-{{ $message->id }}">
                                     <i class="fas fa-trash fa-sm fa-fw"></i>
                                 </button>
@@ -55,14 +56,14 @@
                                                 Are you sure you want to delete the message?
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
+                                                <button type="button" class="btn close"
                                                     data-dismiss="modal">Close</button>
 
                                                 <form action="{{ route('admin.messages.destroy', $message->id) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Confirm</button>
+                                                    <button type="submit" class="btn confirm">Confirm</button>
                                                 </form>
                                             </div>
                                         </div>

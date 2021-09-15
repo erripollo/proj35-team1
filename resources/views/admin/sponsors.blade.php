@@ -22,13 +22,12 @@
         @endif
         @if (!session('success_message'))
             <div>
-                <div class="card-group">
-
+                <div class="card-group sponsors">
                     @foreach ($sponsors as $sponsor)
                         <div class="card border m-2 text-center">
                             <label class="card-body text-center" for="{{ $sponsor->name }}">
                                 <h3 class="sponsor-name card-title text-center">{{ $sponsor->name }} </h3>
-                                <p class="card-text">durata: {{ $sponsor->period }} ore</p>
+                                <p class="card-text">durata: {{ $sponsor->period }} ORE</p>
                                 <p class="card-text"><small
                                         class="font-weight-bold text-monospace sponsor-price">{{ $sponsor->price }}
                                         €</small></p>

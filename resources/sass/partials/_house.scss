@@ -3,6 +3,28 @@ h3 {
     font-weight: bolder;
 }
 
+.dropdown_menu {
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    z-index: 2;
+    height: 115px;
+    overflow: auto;
+    ul {
+        list-style: none;
+        text-align: left;
+        margin-top: 5px;
+        padding: 5px;
+
+        li {
+            margin: 0 0 10px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
 .selection {
     margin-top: 3rem;
     text-align: center;

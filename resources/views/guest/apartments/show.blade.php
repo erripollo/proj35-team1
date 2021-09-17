@@ -15,7 +15,8 @@
             <h4 class="homeaddress">{{ $apartment->address }}</h4>
         </div>
         <div class="col-12 imgdiv">
-            <img class="img-fluid" src="{{ asset('storage/' . $apartment->image) }}" alt="">
+            <img class="img-fluid" src="{{ asset('storage/' . $apartment->image) }}" alt=""
+                style="object-fit: cover;">
         </div>
         <div class="d-flex flex-row mt-5">
             <div class="d-flex flex-column col-6 homedesc">

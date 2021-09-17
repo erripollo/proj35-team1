@@ -90,7 +90,7 @@
             <div class="container">
                 <a class="navbar-brand" style="font-size: 1.3rem" href="{{ url('/') }}">
                     <div class="d-flex align-items-end">
-                        <img src="img/logo.jpg" class="img-fluid" width="18%" alt=""> 
+                        <img src="img/logo.jpg" class="img-fluid" width="18%" alt="">
 
                     </div>
                 </a>
@@ -127,9 +127,10 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Admin</a>
+                                    <a href="{{ route('home') }}" class="dropdown-item">Home</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                         document.getElementById('logout-form').submit();">
+                                                                                                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

@@ -8,14 +8,15 @@
         <div class="row d-flex align-items-center selection">
             <div class="col-6 pr-5 d-flex justify-content-around align-items-center">
                 {{-- searchApart --}}
-                <div class="form-group">
+                <div class="form-group position-relative">
                     <label for="">Città</label>
                     <input type="search" v-on:keyup="autocompleteAddress" v-model="location" class="form-control"
                         name="location" id="location" aria-describedby="helpId" placeholder=""
                         value="{{ $homeCitySearch }}">
-                    <div v-show="showControl">
-                        <ul v-for="item in autocomplete">
-                            <li @click="searchHomePage(item)">@{{ item . address . municipality }},
+                    <div class="dropdown_menu" v-show="showControl">
+                        <ul>
+                            <li v-for="item in autocomplete" @click="searchHomePage(item)">
+                                @{{ item . address . municipality }},
                                 @{{ item . address . countrySubdivision }}</li>
                         </ul>
                         {{-- <div class="list-group">

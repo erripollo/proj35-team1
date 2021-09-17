@@ -10348,6 +10348,27 @@ h3 {
   font-weight: bolder;
 }
 
+.dropdown_menu {
+  position: absolute;
+  top: 70px;
+  left: 0px;
+  z-index: 2;
+  height: 115px;
+  overflow: auto;
+}
+.dropdown_menu ul {
+  list-style: none;
+  text-align: left;
+  margin-top: 5px;
+  padding: 5px;
+}
+.dropdown_menu ul li {
+  margin: 0 0 10px;
+}
+.dropdown_menu ul li:hover {
+  cursor: pointer;
+}
+
 .selection {
   margin-top: 3rem;
   text-align: center;

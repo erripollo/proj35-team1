@@ -24,7 +24,7 @@ Route::get('/', function () {
         ->where('visible', true)
         ->paginate(4));
     return view('guest.welcome', compact('sponsoredApartment'));
-});
+})->name('home');
 
 /* view apartment and send messages */
 Route::get('guest/apartment/{apartment}', 'SearchController@show')->name('guest.apartment.show');

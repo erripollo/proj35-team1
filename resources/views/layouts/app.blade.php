@@ -82,7 +82,7 @@
                                     <a href="{{ route('admin.dashboard') }}" class="dropdown-item">Admin</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -98,7 +98,7 @@
             </div>
         </nav>
 
-        <main style="min-height: 550px">
+        <main style="min-height: 700px">
             @yield('content')
         </main>
     </div>

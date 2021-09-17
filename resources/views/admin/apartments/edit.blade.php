@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 class="text-center pt-3 pb-3">EDIT THE APARTMENT</h1>
+    <h1 class="text-center pt-3 pb-3">MODIFICA APPARTAMENTO</h1>
 
     <div class="container">
 
@@ -21,7 +21,7 @@
             @method('put')
 
             <div class="form-group">
-                <label for="title">EDIT TITLE:</label>
+                <label for="title">MODIFICA TITOLO:</label>
                 <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror"
                     placeholder="Add a title" aria-describedby="titleHelper" value="{{ $apartment->title }}" required>
             </div>
@@ -30,12 +30,12 @@
             @enderror
 
             <div class="form-group">
-                <label for="address">EDIT ADDRESS:</label>
+                <label for="address">MODIFICA INDIRIZZO:</label>
                 <input v-on:keyup="autocompleteAddress" type="text" name="address" id="address"
                     class="form-control @error('address') is-invalid @enderror" placeholder="Add a address"
                     aria-describedby="addressHelper" value="{{ $apartment->address }}" v-model="location" required>
-                <div v-show="showControl">
-                    <ul v-for="item in autocomplete">
+                <div v-show="showControl" style="background-color: white;">
+                    <ul v-for="item in autocomplete" style="list-style: none; padding: 0 10px;">
                         <li @click="luogo(item)">@{{ item . address . municipality }},
                             @{{ item . address . countrySubdivision }},
                             @{{ item . address . streetName }}, @{{ item . address . streetNumber }}</li>
@@ -82,7 +82,7 @@
 
             {{-- load image --}}
             <div class="form-group">
-                <label for="image">Change image</label>
+                <label for="image">CAMBIA IMMAGINE</label>
                 <input type="file" name="image" id="image" class="form-control-file"
                     placeholder="Change the apartment image" aria-describedby="imageHelper" @error('image') is-invalid
                     @enderror>
@@ -94,7 +94,7 @@
             @enderror
 
             <div class="form-group">
-                <label for="description">EDIT DESCRIPTION:</label>
+                <label for="description">MODIFICA DESCRIZIONE:</label>
                 <textarea name="description" id="description"
                     class="form-control text-muted @error('description') is-invalid @enderror" rows="5"
                     placeholder="Add a description">{{ $apartment->description }}</textarea>
@@ -104,7 +104,7 @@
             @enderror
 
             <div class="form-group">
-                <label for="n_rooms">EDIT ROOMS:</label>
+                <label for="n_rooms">MODIFICA STANZE:</label>
                 <input type="number" name="n_rooms" id="n_rooms" class="form-control @error('n_rooms') is-invalid @enderror"
                     placeholder="Add a n_rooms" aria-describedby="n_roomsHelper" value="{{ $apartment->n_rooms }}"
                     required>
@@ -114,7 +114,7 @@
             @enderror
 
             <div class="form-group">
-                <label for="n_baths">EDIT BATHS:</label>
+                <label for="n_baths">MODIFICA BAGNI:</label>
                 <input type="number" name="n_baths" id="n_baths" class="form-control @error('n_baths') is-invalid @enderror"
                     placeholder="Add a n_baths" aria-describedby="n_bathsHelper" value="{{ $apartment->n_baths }}"
                     required>
@@ -124,7 +124,7 @@
             @enderror
 
             <div class="form-group">
-                <label for="n_beds">EDIT BEDS:</label>
+                <label for="n_beds">MODIFICA LETTI:</label>
                 <input type="number" name="n_beds" id="n_beds" class="form-control @error('n_beds') is-invalid @enderror"
                     placeholder="Add a n_beds" aria-describedby="n_bedsHelper" value="{{ $apartment->n_beds }}" required>
             </div>
@@ -133,7 +133,7 @@
             @enderror
 
             <div class="form-group">
-                <label for="square_meters">EDIT SQUARE METERS:</label>
+                <label for="square_meters">MODIFICA METRI QUADRI:</label>
                 <input type="number" name="square_meters" id="square_meters"
                     class="form-control @error('square_meters') is-invalid @enderror" placeholder="Add a square_meters"
                     aria-describedby="square_metersHelper" value="{{ $apartment->square_meters }}" required>
@@ -143,7 +143,7 @@
             @enderror
 
             <div class="form-group">
-                <label for="services">EDIT SERVICES:</label>
+                <label for="services">MODIFICA SERVIZI:</label>
                 <select multiple class="form-control" name="services[]" id="services">
                     <option value="" disabled>Select a service</option>
                     @if ($services)
@@ -163,13 +163,13 @@
             </div>
 
             <fieldset class="form-group row">
-                <legend class="col-form-label col-sm-2 float-sm-left pt-0">VISIBLE:</legend>
+                <legend class="col-form-label col-sm-2 float-sm-left pt-0">VUOI PUBBLICARLO?:</legend>
                 <div class="col-sm-10">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="visible" id="visible" value="1"
                             {{ $apartment->visible ? 'checked' : '' }}>
                         <label class="form-check-label" for="visible">
-                            YES
+                            SI
                         </label>
                     </div>
                     <div class="form-check">

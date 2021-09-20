@@ -47,7 +47,7 @@ class ServiceSeeder extends Seeder
                 'icon' => 'fas fa-tv',
             ],
             [
-                'name' => 'Parchegio',
+                'name' => 'Parcheggio',
                 'icon' => 'fas fa-parking',
             ],
             [

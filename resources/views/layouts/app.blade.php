@@ -31,9 +31,8 @@
         href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.64.0/maps/maps.css' />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <!-- Icon -->
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-
-
 
 </head>
 

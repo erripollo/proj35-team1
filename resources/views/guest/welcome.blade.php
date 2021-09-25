@@ -27,7 +27,7 @@
                         </div>
                         <a v-on:click="persist" name="search" id="search" class="btn button_search"
                             :class="(location) ? 'active' : 'disabled' " href="{{ route('house') }}"
-                            role="button">Search</a>
+                            role="button">Cerca</a>
                     </div>
                 </form>
             </div>

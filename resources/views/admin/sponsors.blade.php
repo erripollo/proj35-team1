@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <form class="card" method="post" id="payment-form" style="padding: 20px"
+    <form class="card mt-4" method="post" id="payment-form" style="padding: 20px"
         action="{{ route('admin.checkout', compact('apartment')) }}">
         @csrf
         @method('POST')
